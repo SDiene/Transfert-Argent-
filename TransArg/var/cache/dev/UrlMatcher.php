@@ -13,6 +13,8 @@ return [
         '/_profiler/search_bar' => [[['_route' => '_profiler_search_bar', '_controller' => 'web_profiler.controller.profiler::searchBarAction'], null, null, null, false, false, null]],
         '/_profiler/phpinfo' => [[['_route' => '_profiler_phpinfo', '_controller' => 'web_profiler.controller.profiler::phpinfoAction'], null, null, null, false, false, null]],
         '/_profiler/open' => [[['_route' => '_profiler_open_file', '_controller' => 'web_profiler.controller.profiler::openAction'], null, null, null, false, false, null]],
+        '/api' => [[['_route' => '_apicompte', '_controller' => 'App\\Controller\\CompteController::index'], null, null, null, true, false, null]],
+        '/partenaire' => [[['_route' => 'partenaire', '_controller' => 'App\\Controller\\PartenaireController::index'], null, null, null, false, false, null]],
     ],
     [ // $regexpList
         0 => '{^(?'
@@ -32,10 +34,18 @@ return [
                     .')'
                 .')'
                 .'|/api(?'
-                    .'|(?:/(index)(?:\\.([^/]++))?)?(*:204)'
+                    .'|/([^/]++)(*:185)'
+                    .'|(?:/(\\d+))?(*:204)'
                     .'|/(?'
-                        .'|docs(?:\\.([^/]++))?(*:235)'
-                        .'|contexts/(.+)(?:\\.([^/]++))?(*:271)'
+                        .'|compte(*:222)'
+                        .'|transaction(*:241)'
+                        .'|user(*:253)'
+                    .')'
+                    .'|(*:262)'
+                    .'|(?:/(index)(?:\\.([^/]++))?)?(*:298)'
+                    .'|/(?'
+                        .'|docs(?:\\.([^/]++))?(*:329)'
+                        .'|contexts/(.+)(?:\\.([^/]++))?(*:365)'
                     .')'
                 .')'
             .')/?$}sDu',
@@ -48,9 +58,18 @@ return [
         136 => [[['_route' => '_profiler_exception', '_controller' => 'web_profiler.controller.exception::showAction'], ['token'], null, null, false, false, null]],
         149 => [[['_route' => '_profiler_exception_css', '_controller' => 'web_profiler.controller.exception::cssAction'], ['token'], null, null, false, false, null]],
         159 => [[['_route' => '_profiler', '_controller' => 'web_profiler.controller.profiler::panelAction'], ['token'], null, null, false, true, null]],
-        204 => [[['_route' => 'api_entrypoint', '_controller' => 'api_platform.action.entrypoint', '_format' => '', '_api_respond' => 'true', 'index' => 'index'], ['index', '_format'], null, null, false, true, null]],
-        235 => [[['_route' => 'api_doc', '_controller' => 'api_platform.action.documentation', '_format' => '', '_api_respond' => 'true'], ['_format'], null, null, false, true, null]],
-        271 => [
+        185 => [[['_route' => '_apishow_compte', '_controller' => 'App\\Controller\\CompteController::show'], ['id'], ['GET' => 0], null, false, true, null]],
+        204 => [[['_route' => '_apilist_compte', 'page' => '1', '_controller' => 'App\\Controller\\CompteController::list'], ['page'], ['GET' => 0], null, false, true, null]],
+        222 => [[['_route' => '_apiadd_compte', '_controller' => 'App\\Controller\\CompteController::Ajout'], [], ['POST' => 0, 'GET' => 1], null, false, false, null]],
+        241 => [[['_route' => '_apiadd_transaction', '_controller' => 'App\\Controller\\TransactionController::Ajout'], [], ['POST' => 0], null, false, false, null]],
+        253 => [[['_route' => 'add_user', '_controller' => 'App\\Controller\\UserController::register'], [], ['POST' => 0], null, false, false, null]],
+        262 => [
+            [['_route' => '_apitransaction', '_controller' => 'App\\Controller\\TransactionController::index'], [], null, null, true, false, null],
+            [['_route' => 'user', '_controller' => 'App\\Controller\\UserController::index'], [], null, null, true, false, null],
+        ],
+        298 => [[['_route' => 'api_entrypoint', '_controller' => 'api_platform.action.entrypoint', '_format' => '', '_api_respond' => 'true', 'index' => 'index'], ['index', '_format'], null, null, false, true, null]],
+        329 => [[['_route' => 'api_doc', '_controller' => 'api_platform.action.documentation', '_format' => '', '_api_respond' => 'true'], ['_format'], null, null, false, true, null]],
+        365 => [
             [['_route' => 'api_jsonld_context', '_controller' => 'api_platform.jsonld.action.context', '_format' => 'jsonld', '_api_respond' => 'true'], ['shortName', '_format'], null, null, false, true, null],
             [null, null, null, null, false, false, 0],
         ],
