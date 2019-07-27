@@ -21,6 +21,11 @@ class Compte
      */
     private $numerocompte;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Partenaire", inversedBy="compte")
+     */
+    private $partenaire;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -34,6 +39,18 @@ class Compte
     public function setNumerocompte(int $numerocompte): self
     {
         $this->numerocompte = $numerocompte;
+
+        return $this;
+    }
+
+    public function getPartenaire(): ?Partenaire
+    {
+        return $this->partenaire;
+    }
+
+    public function setPartenaire(?Partenaire $partenaire): self
+    {
+        $this->partenaire = $partenaire;
 
         return $this;
     }

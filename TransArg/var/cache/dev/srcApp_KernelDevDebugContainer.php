@@ -16,6 +16,6 @@ if (!\class_exists(srcApp_KernelDevDebugContainer::class, false)) {
 
 return new \ContainerNVcrMIW\srcApp_KernelDevDebugContainer([
     'container.build_hash' => 'NVcrMIW',
-    'container.build_id' => '0fae0e0c',
-    'container.build_time' => 1564245569,
+    'container.build_id' => '51b23e90',
+    'container.build_time' => 1564259550,
 ], __DIR__.\DIRECTORY_SEPARATOR.'ContainerNVcrMIW');

@@ -24,14 +24,9 @@ class Transaction
     private $datetransaction;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\User", mappedBy="transaction")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="transaction")
      */
-    private $users;
-
-    public function __construct()
-    {
-        $this->users = new ArrayCollection();
-    }
+    private $user;
 
     public function getId(): ?int
     {
@@ -50,33 +45,14 @@ class Transaction
         return $this;
     }
 
-    /**
-     * @return Collection|User[]
-     */
-    public function getUsers(): Collection
+    public function getUser(): ?User
     {
-        return $this->users;
+        return $this->user;
     }
 
-    public function addUser(User $user): self
+    public function setUser(?User $user): self
     {
-        if (!$this->users->contains($user)) {
-            $this->users[] = $user;
-            $user->setTransaction($this);
-        }
-
-        return $this;
-    }
-
-    public function removeUser(User $user): self
-    {
-        if ($this->users->contains($user)) {
-            $this->users->removeElement($user);
-            // set the owning side to null (unless already changed)
-            if ($user->getTransaction() === $this) {
-                $user->setTransaction(null);
-            }
-        }
+        $this->user = $user;
 
         return $this;
     }

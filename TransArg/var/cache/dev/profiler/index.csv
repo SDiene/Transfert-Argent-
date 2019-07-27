@@ -53,3 +53,5 @@ ee4fca,127.0.0.1,GET,http://127.0.0.1:8000/api/partenaire,1564241619,366d26,200
 568e7f,127.0.0.1,GET,http://127.0.0.1:8000/api/partenaire,1564242170,348d3c,200
 348d3c,127.0.0.1,POST,http://127.0.0.1:8000/api/partenaire,1564242170,,500
 dcfe1a,127.0.0.1,POST,http://localhost:8000/api/transaction,1564245748,,201
+837c73,127.0.0.1,GET,http://127.0.0.1:8000/api/user,1564247898,ef70f9,200
+ef70f9,127.0.0.1,POST,http://127.0.0.1:8000/api/user,1564247898,,500

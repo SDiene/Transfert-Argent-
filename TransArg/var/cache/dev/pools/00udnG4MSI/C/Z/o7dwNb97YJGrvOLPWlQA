@@ -8,10 +8,10 @@
         [
             'stdClass' => [
                 'targetEntity' => [
-                    'App\\Entity\\User',
+                    'App\\Entity\\Partenaire',
                 ],
                 'inversedBy' => [
-                    'transaction',
+                    'depot',
                 ],
             ],
         ],

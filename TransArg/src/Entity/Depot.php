@@ -29,14 +29,9 @@ class Depot
     private $montant;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Partenaire", mappedBy="depot")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Partenaire", inversedBy="depot")
      */
-    private $partenaires;
-
-    public function __construct()
-    {
-        $this->partenaires = new ArrayCollection();
-    }
+    private $partenaire;
 
     public function getId(): ?int
     {
@@ -67,34 +62,16 @@ class Depot
         return $this;
     }
 
-    /**
-     * @return Collection|Partenaire[]
-     */
-    public function getPartenaires(): Collection
+    public function getPartenaire(): ?Partenaire
     {
-        return $this->partenaires;
+        return $this->partenaire;
     }
 
-    public function addPartenaire(Partenaire $partenaire): self
+    public function setPartenaire(?Partenaire $partenaire): self
     {
-        if (!$this->partenaires->contains($partenaire)) {
-            $this->partenaires[] = $partenaire;
-            $partenaire->setDepot($this);
-        }
+        $this->partenaire = $partenaire;
 
         return $this;
     }
 
-    public function removePartenaire(Partenaire $partenaire): self
-    {
-        if ($this->partenaires->contains($partenaire)) {
-            $this->partenaires->removeElement($partenaire);
-            // set the owning side to null (unless already changed)
-            if ($partenaire->getDepot() === $this) {
-                $partenaire->setDepot(null);
-            }
-        }
-
-        return $this;
-    }
 }

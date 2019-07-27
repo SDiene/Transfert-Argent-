@@ -26,14 +26,9 @@ class PartenaireType extends AbstractType
                 'class'=>Compte::class,
                 'choice_label' => 'compte_id'
             ])
-            ->add('user',EntityType::class,[
-                'class'=>User::class,
-                'choice_label' => 'user_id'
-            ])
-            ->add('depot',EntityType::class,[
-                'class'=>Depot::class,
-                'choice_label' => 'depot_id'
-            ]);
+            ->add('user')
+            ->add('depot');
+            
     }
 
     public function configureOptions(OptionsResolver $resolver)

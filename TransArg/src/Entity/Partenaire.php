@@ -43,31 +43,25 @@ class Partenaire
      */
     private $tel;
 
-    private $utilisateur;
-
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Compte", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\OneToMany(targetEntity="App\Entity\Compte", mappedBy="partenaire")
      */
     private $compte;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Depot", mappedBy="partenaire")
+     */
+    private $depot;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\User", mappedBy="partenaire")
      */
     private $users;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="partenaires")
-     */
-    private $user;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Depot", inversedBy="partenaires")
-     */
-    private $depot;
-
     public function __construct()
     {
+        $this->compte = new ArrayCollection();
+        $this->depot = new ArrayCollection();
         $this->users = new ArrayCollection();
     }
 
@@ -136,14 +130,64 @@ class Partenaire
         return $this;
     }
 
-    public function getCompte(): ?Compte
+    /**
+     * @return Collection|Compte[]
+     */
+    public function getCompte(): Collection
     {
         return $this->compte;
     }
 
-    public function setCompte(Compte $compte): self
+    public function addCompte(Compte $compte): self
     {
-        $this->compte = $compte;
+        if (!$this->compte->contains($compte)) {
+            $this->compte[] = $compte;
+            $compte->setPartenaire($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCompte(Compte $compte): self
+    {
+        if ($this->compte->contains($compte)) {
+            $this->compte->removeElement($compte);
+            // set the owning side to null (unless already changed)
+            if ($compte->getPartenaire() === $this) {
+                $compte->setPartenaire(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Depot[]
+     */
+    public function getDepot(): Collection
+    {
+        return $this->depot;
+    }
+
+    public function addDepot(Depot $depot): self
+    {
+        if (!$this->depot->contains($depot)) {
+            $this->depot[] = $depot;
+            $depot->setPartenaire($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDepot(Depot $depot): self
+    {
+        if ($this->depot->contains($depot)) {
+            $this->depot->removeElement($depot);
+            // set the owning side to null (unless already changed)
+            if ($depot->getPartenaire() === $this) {
+                $depot->setPartenaire(null);
+            }
+        }
 
         return $this;
     }
@@ -179,27 +223,4 @@ class Partenaire
         return $this;
     }
 
-    public function getUser(): ?User
-    {
-        return $this->user;
-    }
-
-    public function setUser(?User $user): self
-    {
-        $this->user = $user;
-
-        return $this;
-    }
-
-    public function getDepot(): ?Depot
-    {
-        return $this->depot;
-    }
-
-    public function setDepot(?Depot $depot): self
-    {
-        $this->depot = $depot;
-
-        return $this;
-    }
 }

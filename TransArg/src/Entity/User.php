@@ -46,18 +46,18 @@ class User implements UserInterface
     private $prenom;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Partenaire", mappedBy="user")
-     */
-    private $partenaires;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Transaction", inversedBy="users")
+     * @ORM\OneToMany(targetEntity="App\Entity\Transaction", mappedBy="user")
      */
     private $transaction;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Partenaire", inversedBy="users")
+     */
+    private $partenaire;
+
     public function __construct()
     {
-        $this->partenaires = new ArrayCollection();
+        $this->transaction = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -158,44 +158,44 @@ class User implements UserInterface
     }
 
     /**
-     * @return Collection|Partenaire[]
+     * @return Collection|Transaction[]
      */
-    public function getPartenaires(): Collection
+    public function getTransaction(): Collection
     {
-        return $this->partenaires;
+        return $this->transaction;
     }
 
-    public function addPartenaire(Partenaire $partenaire): self
+    public function addTransaction(Transaction $transaction): self
     {
-        if (!$this->partenaires->contains($partenaire)) {
-            $this->partenaires[] = $partenaire;
-            $partenaire->setUser($this);
+        if (!$this->transaction->contains($transaction)) {
+            $this->transaction[] = $transaction;
+            $transaction->setUser($this);
         }
 
         return $this;
     }
 
-    public function removePartenaire(Partenaire $partenaire): self
+    public function removeTransaction(Transaction $transaction): self
     {
-        if ($this->partenaires->contains($partenaire)) {
-            $this->partenaires->removeElement($partenaire);
+        if ($this->transaction->contains($transaction)) {
+            $this->transaction->removeElement($transaction);
             // set the owning side to null (unless already changed)
-            if ($partenaire->getUser() === $this) {
-                $partenaire->setUser(null);
+            if ($transaction->getUser() === $this) {
+                $transaction->setUser(null);
             }
         }
 
         return $this;
     }
 
-    public function getTransaction(): ?Transaction
+    public function getPartenaire(): ?Partenaire
     {
-        return $this->transaction;
+        return $this->partenaire;
     }
 
-    public function setTransaction(?Transaction $transaction): self
+    public function setPartenaire(?Partenaire $partenaire): self
     {
-        $this->transaction = $transaction;
+        $this->partenaire = $partenaire;
 
         return $this;
     }
