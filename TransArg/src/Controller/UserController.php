@@ -14,21 +14,25 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 /**
  * @Route("/api")
  */
+
 class UserController extends AbstractController
 {
     /**
      * @Route("/", name="user")
-     */
+    */
+
     public function index()
     {
         return $this->render('user/index.html.twig', [
             'controller_name' => 'UserController',
         ]);
     }
+
     /**
      * @Route("/user", name="add_user", methods={"POST"})
      */
-    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, EntityManagerInterface $entityManager)
+
+    public function adduser(Request $request, UserPasswordEncoderInterface $passwordEncoder, EntityManagerInterface $entityManager)
     {
         $values = json_decode($request->getContent());
         if(isset($values->username,$values->password)) {
@@ -36,6 +40,7 @@ class UserController extends AbstractController
 
             $user->setNom($values->nom);
             $user->setPrenom($values->prenom);
+            $user->setTransaction($values->transaction);
             $user->setUsername($values->username);
             $user->setPassword($passwordEncoder->encodePassword($user, $values->password));
             $user->setRoles($user->getRoles());
@@ -55,8 +60,5 @@ class UserController extends AbstractController
         ];
         return new JsonResponse($data, 500);
     }
-    /**
-     * @Route("/login", name="login", methods={"POST"})
-     */
 
 }

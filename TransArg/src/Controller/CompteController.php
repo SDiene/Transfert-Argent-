@@ -68,7 +68,7 @@ class CompteController extends AbstractController
      * @Route("/compte", name="add_compte", methods={"POST","GET"})
      */
 
-    public function Ajout(Request $request, SerializerInterface $serializer, EntityManagerInterface $entityManager)
+    public function add(Request $request, SerializerInterface $serializer, EntityManagerInterface $entityManager)
     {
         $compte = $serializer->deserialize($request->getContent(), Compte::class, 'json');
         $entityManager->persist($compte);
