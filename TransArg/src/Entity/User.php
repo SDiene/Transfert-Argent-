@@ -58,6 +58,7 @@ class User implements UserInterface
     public function __construct()
     {
         $this->transaction = new ArrayCollection();
+
     }
 
     public function getId(): ?int

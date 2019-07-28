@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Entity\Partenaire;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -37,13 +38,15 @@ class UserController extends AbstractController
         $values = json_decode($request->getContent());
         if(isset($values->username,$values->password)) {
             $user = new User();
-
-            $user->setNom($values->nom);
-            $user->setPrenom($values->prenom);
-            $user->setTransaction($values->transaction);
             $user->setUsername($values->username);
             $user->setPassword($passwordEncoder->encodePassword($user, $values->password));
-            $user->setRoles($user->getRoles());
+            $user->setRoles(["Super ADMIN"]);
+            $user->setNom($values->nom);
+            $user->setPrenom($values->prenom);
+            $part=$this->getDoctrine()->getRepository(Partenaire::class)->find($values->partenaire_id);
+            $user->setPartenaire($part);
+            //var_dump($user);
+            //die;
             $entityManager->persist($user);
             $entityManager->flush();
 

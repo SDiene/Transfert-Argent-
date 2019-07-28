@@ -17,9 +17,9 @@ class UserType extends AbstractType
             ->add('password')
             ->add('nom')
             ->add('prenom')
-            ->add('transaction',EntityType::class,[
-                'class'=>Transaction::class,
-                'choice_label' => 'transaction_id'
+            ->add('partenaire',EntityType::class,[
+                'class'=>Partenaire::class,
+                'choice_label' => 'partenaire_id'
             ]);
     }
 
