@@ -11,12 +11,11 @@
                     '/compte',
                 ],
                 'name' => [
-                    'add_compte',
+                    'new_compte',
                 ],
                 'methods' => [
                     [
                         'POST',
-                        'GET',
                     ],
                 ],
             ],

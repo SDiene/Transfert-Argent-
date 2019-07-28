@@ -17,10 +17,8 @@ class UserType extends AbstractType
             ->add('password')
             ->add('nom')
             ->add('prenom')
-            ->add('transaction',EntityType::class,[
-                'class'=>Transaction::class,
-                'choice_label' => 'transaction_id'
-            ]);
+            ->add('partenaire')
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver)

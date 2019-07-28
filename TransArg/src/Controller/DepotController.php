@@ -4,16 +4,16 @@ namespace App\Controller;
 
 use App\Entity\Depot;
 
+use App\Form\DepotType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Serializer\SerializerInterface;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
  * @Route("/api", name="api")
 */
+
 class DepotController extends AbstractController
 {
     /**
@@ -25,21 +25,21 @@ class DepotController extends AbstractController
             'controller_name' => 'DepotController',
         ]);
     }
-    
+
     /**
-     * @Route("/depot", name="add_depot", methods={"POST","GET"})
-     */
+     * @Route("/depot", name="new_depot", methods={"POST"})
+    */
 
-    public function add(Request $request, SerializerInterface $serializer, EntityManagerInterface $entityManager)
+    public function add(Request $request, EntityManagerInterface $entityManager)
     {
-        $compte = $serializer->deserialize($request->getContent(), Depot::class, 'json');
-        $entityManager->persist($compte);
-        $entityManager->flush();
-        $data = [
-            'status' => 201,
-            'message' => 'Une depot a été ajouté'
-        ];
-
-        return new JsonResponse($data, 201);
+        $depot = new Depot();
+        $form=$this->createForm(DepotType::class,$depot);
+        $data=json_decode($request->getContent(),true);
+        $form->handleRequest($request);
+        $form->submit($data);
+            $entityManager=$this->getDoctrine()->getManager();
+            $entityManager->persist($depot);
+            $entityManager->flush();
+            return new Response('Une depot a bien été ajoutée', Response::HTTP_CREATED);
     }
 }

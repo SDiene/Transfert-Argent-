@@ -40,7 +40,7 @@ class UserController extends AbstractController
 
             $user->setNom($values->nom);
             $user->setPrenom($values->prenom);
-            $user->setTransaction($values->transaction);
+            $user->setPartenaire($values->transaction);
             $user->setUsername($values->username);
             $user->setPassword($passwordEncoder->encodePassword($user, $values->password));
             $user->setRoles($user->getRoles());

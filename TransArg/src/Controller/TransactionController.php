@@ -7,9 +7,9 @@ use App\Entity\Transaction;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Serializer\SerializerInterface;
+use Symfony\Component\HttpFoundation\Response;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\HttpFoundation\JsonResponse;
+use App\Form\TransactionType;
 
 /**
  * @Route("/api",name="_api")
@@ -26,21 +26,21 @@ class TransactionController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/transaction", name="add_transaction", methods={"POST"})
-     */
+     /**
+     * @Route("/transaction", name="new_transaction", methods={"POST"})
+    */
 
-    public function Ajout(Request $request, SerializerInterface $serializer, EntityManagerInterface $entityManager)
+    public function add(Request $request, EntityManagerInterface $entityManager)
     {
-        $transaction = $serializer->deserialize($request->getContent(), Transaction::class, 'json');
-        $entityManager->persist($transaction);
-        $entityManager->flush();
-        $data = [
-            'status' => 201,
-            'message' => 'La date de transaction a bien été ajouté'
-        ];
-
-        return new JsonResponse($data, 201);
+        $transaction = new Transaction();
+        $form=$this->createForm(TransactionType::class,$transaction);
+        $data=json_decode($request->getContent(),true);
+        $form->handleRequest($request);
+        $form->submit($data);
+            $entityManager=$this->getDoctrine()->getManager();
+            $entityManager->persist($transaction);
+            $entityManager->flush();
+            return new Response('La transaction a bien été enregistré', Response::HTTP_CREATED);
     }
 
 }

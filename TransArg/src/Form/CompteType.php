@@ -3,9 +3,12 @@
 namespace App\Form;
 
 use App\Entity\Compte;
+use App\Entity\Partenaire;
+
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class CompteType extends AbstractType
 {
@@ -13,6 +16,10 @@ class CompteType extends AbstractType
     {
         $builder
             ->add('numerocompte')
+            ->add('partenaire',EntityType::class,[
+                'class'=>Partenaire::class,
+                'choice_label'=>'partenaire_id'
+            ])
         ;
     }
 
@@ -20,6 +27,7 @@ class CompteType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Compte::class,
+            'csrf_protection'=>false
         ]);
     }
 }

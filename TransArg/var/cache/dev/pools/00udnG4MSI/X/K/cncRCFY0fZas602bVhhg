@@ -11,12 +11,11 @@
                     '/depot',
                 ],
                 'name' => [
-                    'add_depot',
+                    'new_depot',
                 ],
                 'methods' => [
                     [
                         'POST',
-                        'GET',
                     ],
                 ],
             ],

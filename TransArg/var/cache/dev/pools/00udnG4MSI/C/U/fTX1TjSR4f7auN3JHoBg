@@ -11,11 +11,10 @@
                     '/partenaire',
                 ],
                 'name' => [
-                    'new_partenaire',
+                    'add_depot',
                 ],
                 'methods' => [
                     [
-                        'GET',
                         'POST',
                     ],
                 ],

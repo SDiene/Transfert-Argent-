@@ -4,15 +4,12 @@ namespace App\Controller;
 
 use App\Entity\Compte;
 
-use App\Repository\CompteRepository;
+use App\Form\CompteType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Serializer\SerializerInterface;
-use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
-
+use Doctrine\ORM\EntityManagerInterface;
 /**
  * @Route("/api",name="_api")
 */
@@ -27,58 +24,21 @@ class CompteController extends AbstractController
             'controller_name' => 'CompteController',
         ]);
     }
-    
-    /** 
-     * @Route("/{id}", name="show_compte", methods={"GET"})
-     */
-    public function show(Compte $compte, CompteRepository $compteRepository, SerializerInterface $serializer)
-    {
-        $compte = $compteRepository->find($compte->getId());
-        $data = $serializer->serialize($compte, 'json', [
-            'groups' => ['show']
-        ]);
-        return new Response($data, 200, [
-            'Content-Type' => 'application/json'
-        ]);
-    }
 
     /**
-     * @Route("/{page<\d+>?1}", name="list_compte", methods={"GET"})
-     */
-    public function list(Request $request,CompteRepository $compteRepository, SerializerInterface $serializer)
+     * @Route("/compte", name="new_compte", methods={"POST"})
+    */
+
+    public function add(Request $request, EntityManagerInterface $entityManager)
     {
-        $page = $request->query->get('page');
-        if(is_null($page) || $page < 1) {
-            $page = 1;
-        }
-        
-        $limit = 10;
-
-        $comptes = $compteRepository->findAllcomptes($page, $limit);
-        $data = $serializer->serialize($comptes, 'json',[
-            'groups' => ['list']
-        ]);
-
-        return new Response($data, 200, [
-            'Content-Type' => 'application/json'
-        ]);
+        $compte = new Compte();
+        $form=$this->createForm(CompteType::class,$compte);
+        $data=json_decode($request->getContent(),true);
+        $form->handleRequest($request);
+        $form->submit($data);
+            $entityManager=$this->getDoctrine()->getManager();
+            $entityManager->persist($compte);
+            $entityManager->flush();
+            return new Response('Une compte a bien été ajoutée', Response::HTTP_CREATED);
     }
-
-    /**
-     * @Route("/compte", name="add_compte", methods={"POST","GET"})
-     */
-
-    public function add(Request $request, SerializerInterface $serializer, EntityManagerInterface $entityManager)
-    {
-        $compte = $serializer->deserialize($request->getContent(), Compte::class, 'json');
-        $entityManager->persist($compte);
-        $entityManager->flush();
-        $data = [
-            'status' => 201,
-            'message' => 'Le numéro de compte a bien été ajouté'
-        ];
-
-        return new JsonResponse($data, 201);
-    }
-    
 }
