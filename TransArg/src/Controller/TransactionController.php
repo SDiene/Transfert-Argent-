@@ -3,22 +3,24 @@
 namespace App\Controller;
 
 use App\Entity\Transaction;
+use App\Form\TransactionType;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Doctrine\ORM\EntityManagerInterface;
-use App\Form\TransactionType;
 
 /**
  * @Route("/api",name="_api")
 */
+
 class TransactionController extends AbstractController
 {
     /**
      * @Route("/", name="transaction")
      */
+    
     public function index()
     {
         return $this->render('transaction/index.html.twig', [
