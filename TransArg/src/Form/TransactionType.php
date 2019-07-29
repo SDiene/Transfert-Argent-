@@ -16,7 +16,9 @@ class TransactionType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add(new \DateTime())
+            ->add('date',DateType::class,[
+                'widget' => 'single_text'
+            ])
             ->add('user',EntityType::class,[
                 'user'=>User::class,
                 'choice_label'=>'user_id'

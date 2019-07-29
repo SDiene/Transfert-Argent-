@@ -1783,14 +1783,6 @@
         <argument>2048</argument>
       </call>
       <call method="addListener">
-        <argument>console.command</argument>
-        <argument type="collection">
-          <argument type="service" id="debug.debug_handlers_listener"/>
-          <argument>configure</argument>
-        </argument>
-        <argument>2048</argument>
-      </call>
-      <call method="addListener">
         <argument>kernel.exception</argument>
         <argument type="collection">
           <argument type="service" id="debug.debug_handlers_listener"/>
@@ -4965,6 +4957,15 @@
         <argument key="serializer" type="service" id="serializer"/>
       </argument>
     </service>
+    <service id=".service_locator.fDbIXxi" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="entityManager" type="service" id="doctrine.orm.default_entity_manager"/>
+        <argument key="partenaire" type="service" id=".errored..service_locator.fDbIXxi.App\Entity\Partenaire"/>
+        <argument key="serializer" type="service" id="serializer"/>
+        <argument key="validator" type="service" id="debug.validator"/>
+      </argument>
+    </service>
     <service id=".service_locator.JBoVXlr" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -4972,19 +4973,21 @@
         <argument key="passwordEncoder" type="service" id="security.user_password_encoder.generic"/>
       </argument>
     </service>
-    <service id=".service_locator.DED5S.P" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+    <service id=".service_locator.FrhVvm2" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
       <tag name="container.service_locator"/>
       <argument type="collection">
-        <argument key="App\Controller\CompteController::add" type="service" id=".service_locator.ZIsCxOI"/>
-        <argument key="App\Controller\DepotController::add" type="service" id=".service_locator.ZIsCxOI"/>
-        <argument key="App\Controller\PartenaireController::add" type="service" id=".service_locator.k22NER8"/>
-        <argument key="App\Controller\TransactionController::add" type="service" id=".service_locator.ZIsCxOI"/>
-        <argument key="App\Controller\UserController::adduser" type="service" id=".service_locator.JBoVXlr"/>
-        <argument key="App\Controller\CompteController:add" type="service" id=".service_locator.ZIsCxOI"/>
-        <argument key="App\Controller\DepotController:add" type="service" id=".service_locator.ZIsCxOI"/>
-        <argument key="App\Controller\PartenaireController:add" type="service" id=".service_locator.k22NER8"/>
-        <argument key="App\Controller\TransactionController:add" type="service" id=".service_locator.ZIsCxOI"/>
-        <argument key="App\Controller\UserController:adduser" type="service" id=".service_locator.JBoVXlr"/>
+        <argument key="App\Controller\CompteController::addcompte" type="service" id=".service_locator.ZIsCxOI"/>
+        <argument key="App\Controller\DepotController::addDepot" type="service" id=".service_locator.ZIsCxOI"/>
+        <argument key="App\Controller\PartenaireController::addPartenaire" type="service" id=".service_locator.k22NER8"/>
+        <argument key="App\Controller\PartenaireController::updatePartenaire" type="service" id=".service_locator.fDbIXxi"/>
+        <argument key="App\Controller\TransactionController::addTransaction" type="service" id=".service_locator.ZIsCxOI"/>
+        <argument key="App\Controller\UserController::addUser" type="service" id=".service_locator.JBoVXlr"/>
+        <argument key="App\Controller\CompteController:addcompte" type="service" id=".service_locator.ZIsCxOI"/>
+        <argument key="App\Controller\DepotController:addDepot" type="service" id=".service_locator.ZIsCxOI"/>
+        <argument key="App\Controller\PartenaireController:addPartenaire" type="service" id=".service_locator.k22NER8"/>
+        <argument key="App\Controller\PartenaireController:updatePartenaire" type="service" id=".service_locator.fDbIXxi"/>
+        <argument key="App\Controller\TransactionController:addTransaction" type="service" id=".service_locator.ZIsCxOI"/>
+        <argument key="App\Controller\UserController:addUser" type="service" id=".service_locator.JBoVXlr"/>
       </argument>
     </service>
     <service id=".service_locator.LtnrEkg" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
@@ -5282,12 +5285,12 @@
       <argument type="service" id="security.token_storage"/>
     </service>
     <service id="debug.argument_resolver.service.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver" public="false">
-      <argument type="service" id=".service_locator.DED5S.P"/>
+      <argument type="service" id=".service_locator.FrhVvm2"/>
     </service>
     <service id="debug.argument_resolver.default.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver" public="false"/>
     <service id="debug.argument_resolver.variadic.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\VariadicValueResolver" public="false"/>
     <service id="debug.argument_resolver.not_tagged_controller.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver" public="false">
-      <argument type="service" id=".service_locator.DED5S.P"/>
+      <argument type="service" id=".service_locator.FrhVvm2"/>
     </service>
     <service id="api_platform.swagger.normalizer.api_gateway.inner" class="ApiPlatform\Core\Swagger\Serializer\DocumentationNormalizer" public="false">
       <argument type="service" id="api_platform.metadata.resource.metadata_factory.cached"/>
@@ -5324,6 +5327,7 @@
       <argument type="service" id="api_platform.metadata.property.metadata_factory.cached"/>
       <argument type="service" id="api_platform.path_segment_name_generator.underscore"/>
     </service>
+    <service id=".errored..service_locator.fDbIXxi.App\Entity\Partenaire" class="App\Entity\Partenaire"/>
     <service id="console.command_loader" class="Symfony\Component\Console\CommandLoader\ContainerCommandLoader" public="true">
       <argument type="service" id=".service_locator.qudbnW5"/>
       <argument type="collection">
@@ -5726,7 +5730,7 @@
     <service id="fos_rest.router" alias="router.default"/>
     <service id="fos_rest.view_handler" alias="fos_rest.view_handler.default" public="true"/>
     <service id="fos_rest.inflector" alias="fos_rest.inflector.doctrine"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.DED5S.P"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.FrhVvm2"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem" public="false"/>
     <service id="twig.loader" alias="twig.loader.native_filesystem"/>
     <service id="api_platform.name_converter" alias="serializer.name_converter.metadata_aware"/>

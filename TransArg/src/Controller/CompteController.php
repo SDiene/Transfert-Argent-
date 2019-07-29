@@ -3,12 +3,12 @@
 namespace App\Controller;
 
 use App\Entity\Compte;
+use App\Entity\Partenaire;
 
-use App\Form\CompteType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Doctrine\ORM\EntityManagerInterface;
 /**
  * @Route("/api",name="_api")
@@ -29,16 +29,23 @@ class CompteController extends AbstractController
      * @Route("/compte", name="new_compte", methods={"POST"})
     */
 
-    public function add(Request $request, EntityManagerInterface $entityManager)
+    public function addcompte(Request $request, EntityManagerInterface $entityManager)
     {
-        $compte = new Compte();
-        $form=$this->createForm(CompteType::class,$compte);
-        $data=json_decode($request->getContent(),true);
-        $form->handleRequest($request);
-        $form->submit($data);
-            $entityManager=$this->getDoctrine()->getManager();
+        $values = json_decode($request->getContent());
+            $compte = new Compte();
+
+            $compte->setNumerocompte($values->numerocompte);
+            $part=$this->getDoctrine()->getRepository(Partenaire::class)->find($values->partenaire_id);
+            $compte->setPartenaire($part);
             $entityManager->persist($compte);
             $entityManager->flush();
-            return new Response('Une compte a bien été ajoutée', Response::HTTP_CREATED);
+
+            $data = [
+                'status' => 201,
+                'message' => 'Le compte vient d\'etre créer'
+            ];
+
+            return new JsonResponse($data, 201);
+        
     }
 }

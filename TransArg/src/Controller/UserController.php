@@ -31,9 +31,9 @@ class UserController extends AbstractController
 
     /**
      * @Route("/user", name="add_user", methods={"POST"})
-     */
+    */
 
-    public function adduser(Request $request, UserPasswordEncoderInterface $passwordEncoder, EntityManagerInterface $entityManager)
+    public function addUser(Request $request, UserPasswordEncoderInterface $passwordEncoder, EntityManagerInterface $entityManager)
     {
         $values = json_decode($request->getContent());
         if(isset($values->username,$values->password)) {
