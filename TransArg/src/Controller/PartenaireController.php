@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Partenaire;
 
+use App\Repository\PartenaireRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -56,7 +57,7 @@ class PartenaireController extends AbstractController
         $partenaireUpdate = $entityManager->getRepository(Partenaire::class)->find($partenaire->getId());
         $data = json_decode($request->getContent());
         foreach ($data as $key => $value){
-            if($key && !empty($value)) {
+            if($key && !empty($value)){
                 $part = ucfirst($key);
                 $setter = 'set'.$part;
                 $partenaireUpdate->$setter($value);
@@ -66,7 +67,7 @@ class PartenaireController extends AbstractController
         if(count($errors)) {
             $errors = $serializer->serialize($errors, 'json');
             return new Response($errors, 500, [
-                'Content-Type' => 'application/json'
+                'Contente-Type' => 'applications/json'
             ]);
         }
         $entityManager->flush();
@@ -77,4 +78,35 @@ class PartenaireController extends AbstractController
         return new JsonResponse($data);
     }
     
+    /**
+     * @Route("/partenaire/{id}", name="show_partenaire", methods={"GET"})
+     */
+
+    public function show(Partenaire $partenaire, PartenaireRepository $partenaireRepository, SerializerInterface $serializer)
+    {
+        $partenaire = $partenaireRepository->find($partenaire->getId());
+        $data = $serializer->serialize($partenaire, 'json', [
+            'groups' => ['show']
+        ]);
+        return new Response($data, 200, [
+            'Content-Type' => 'application/json'
+        ]);
+    }
+
+    /**
+     * @Route("/partenaire/{page<\d+>?1}", name="list_partenaire", methods={"GET"})
+    */
+
+    public function list(Request $request, PartenaireRepository $partenaireRepository, SerializerInterface $serializer)
+    {
+        $page = $request->query->get('page');
+        if(is_null($page) || $page < 1) {
+            $page = 1;
+        }
+        $partenaire = $partenaireRepository->findAll($page, getenv('LIMIT')); 
+        $data = $serializer->serialize($partenaire, 'json', [ 'groups' => ['list'] ]);
+        return new Response($data, 200, [
+            'Content-Type' => 'application/json'
+        ]);
+    }
 }

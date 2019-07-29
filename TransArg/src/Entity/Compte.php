@@ -26,6 +26,11 @@ class Compte
      */
     private $partenaire;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $solde;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -51,6 +56,18 @@ class Compte
     public function setPartenaire(?Partenaire $partenaire): self
     {
         $this->partenaire = $partenaire;
+
+        return $this;
+    }
+
+    public function getSolde(): ?int
+    {
+        return $this->solde;
+    }
+
+    public function setSolde(int $solde): self
+    {
+        $this->solde = $solde;
 
         return $this;
     }

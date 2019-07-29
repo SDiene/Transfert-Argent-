@@ -22,6 +22,7 @@
       <parameter key="WebServerBundle">Symfony\Bundle\WebServerBundle\WebServerBundle</parameter>
       <parameter key="SensioFrameworkExtraBundle">Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle</parameter>
       <parameter key="FOSRestBundle">FOS\RestBundle\FOSRestBundle</parameter>
+      <parameter key="NelmioApiDocBundle">Nelmio\ApiDocBundle\NelmioApiDocBundle</parameter>
     </parameter>
     <parameter key="kernel.bundles_metadata" type="collection">
       <parameter key="FrameworkBundle" type="collection">
@@ -75,6 +76,10 @@
       <parameter key="FOSRestBundle" type="collection">
         <parameter key="path">/home/diene/Documents/Projet-Wari/TransArg/vendor/friendsofsymfony/rest-bundle</parameter>
         <parameter key="namespace">FOS\RestBundle</parameter>
+      </parameter>
+      <parameter key="NelmioApiDocBundle" type="collection">
+        <parameter key="path">/home/diene/Documents/Projet-Wari/TransArg/vendor/nelmio/api-doc-bundle</parameter>
+        <parameter key="namespace">Nelmio\ApiDocBundle</parameter>
       </parameter>
     </parameter>
     <parameter key="kernel.charset">UTF-8</parameter>
@@ -372,6 +377,9 @@
     <parameter key="doctrine_migrations.custom_template">null</parameter>
     <parameter key="doctrine_migrations.organize_migrations">false</parameter>
     <parameter key="fos_rest.format_listener.rules">null</parameter>
+    <parameter key="nelmio_api_doc.areas" type="collection">
+      <parameter>default</parameter>
+    </parameter>
     <parameter key="data_collector.templates" type="collection">
       <parameter key="data_collector.request" type="collection">
         <parameter>request</parameter>
@@ -809,6 +817,7 @@
         <argument>Symfony\Component\Form\Extension\Validator\Type\SubmitTypeValidatorExtension</argument>
         <argument>Symfony\Component\Form\Extension\Csrf\Type\FormTypeCsrfExtension</argument>
         <argument>Symfony\Component\Form\Extension\DataCollector\Type\DataCollectorTypeExtension</argument>
+        <argument>Nelmio\ApiDocBundle\Form\Extension\DocumentationExtension</argument>
       </argument>
       <argument type="collection">
         <argument>Symfony\Component\Form\Extension\Validator\ValidatorTypeGuesser</argument>
@@ -1067,6 +1076,7 @@
           <argument type="service" id="form.type_extension.form.validator"/>
           <argument type="service" id="form.type_extension.csrf"/>
           <argument type="service" id="form.type_extension.form.data_collector"/>
+          <argument type="service" id="nelmio_api_doc.form.documentation_extension"/>
         </argument>
         <argument key="Symfony\Component\Form\Extension\Core\Type\RepeatedType" type="iterator">
           <argument type="service" id="form.type_extension.repeated.validator"/>
@@ -1776,6 +1786,14 @@
       </call>
       <call method="addListener">
         <argument>kernel.request</argument>
+        <argument type="collection">
+          <argument type="service" id="debug.debug_handlers_listener"/>
+          <argument>configure</argument>
+        </argument>
+        <argument>2048</argument>
+      </call>
+      <call method="addListener">
+        <argument>console.command</argument>
         <argument type="collection">
           <argument type="service" id="debug.debug_handlers_listener"/>
           <argument>configure</argument>
@@ -2513,6 +2531,14 @@
       <call method="addPath">
         <argument>/home/diene/Documents/Projet-Wari/TransArg/vendor/symfony/web-profiler-bundle/Resources/views</argument>
         <argument>!WebProfiler</argument>
+      </call>
+      <call method="addPath">
+        <argument>/home/diene/Documents/Projet-Wari/TransArg/vendor/nelmio/api-doc-bundle/Resources/views</argument>
+        <argument>NelmioApiDoc</argument>
+      </call>
+      <call method="addPath">
+        <argument>/home/diene/Documents/Projet-Wari/TransArg/vendor/nelmio/api-doc-bundle/Resources/views</argument>
+        <argument>!NelmioApiDoc</argument>
       </call>
       <call method="addPath">
         <argument>/home/diene/Documents/Projet-Wari/TransArg/templates</argument>
@@ -4745,6 +4771,113 @@
       </argument>
       <argument>null</argument>
     </service>
+    <service id="nelmio_api_doc.controller.swagger_ui" class="Nelmio\ApiDocBundle\Controller\SwaggerUiController" public="true">
+      <argument type="service" id="nelmio_api_doc.generator_locator"/>
+      <argument type="service" id="twig"/>
+    </service>
+    <service id="nelmio_api_doc.controller.swagger" class="Nelmio\ApiDocBundle\Controller\DocumentationController" public="true">
+      <argument type="service" id="nelmio_api_doc.generator_locator"/>
+    </service>
+    <service id="nelmio_api_doc.controller_reflector" class="Nelmio\ApiDocBundle\Util\ControllerReflector" public="false">
+      <argument type="service" id="service_container"/>
+      <argument type="service" id="controller_name_converter"/>
+    </service>
+    <service id="nelmio_api_doc.describers.config" class="Nelmio\ApiDocBundle\Describer\ExternalDocDescriber" public="false">
+      <tag name="nelmio_api_doc.describer" priority="1000"/>
+      <tag name="nelmio_api_doc.describer.default" priority="1000"/>
+      <argument type="collection">
+        <argument key="info" type="collection">
+          <argument key="title">My App</argument>
+          <argument key="description">This is an awesome app!</argument>
+          <argument key="version">1.0.0</argument>
+        </argument>
+      </argument>
+    </service>
+    <service id="nelmio_api_doc.describers.default" class="Nelmio\ApiDocBundle\Describer\DefaultDescriber" public="false">
+      <tag name="nelmio_api_doc.describer" priority="-1000"/>
+      <tag name="nelmio_api_doc.describer.default" priority="-1000"/>
+    </service>
+    <service id="nelmio_api_doc.route_describers.route_metadata" class="Nelmio\ApiDocBundle\RouteDescriber\RouteMetadataDescriber" public="false">
+      <tag name="nelmio_api_doc.route_describer" priority="-300"/>
+    </service>
+    <service id="nelmio_api_doc.model_describers.object" class="Nelmio\ApiDocBundle\ModelDescriber\ObjectModelDescriber" public="false">
+      <tag name="nelmio_api_doc.model_describer"/>
+      <argument type="service" id="property_info"/>
+      <argument type="service" id="annotations.cached_reader"/>
+    </service>
+    <service id="nelmio_api_doc.form.documentation_extension" class="Nelmio\ApiDocBundle\Form\Extension\DocumentationExtension">
+      <tag name="form.type_extension" extended_type="Symfony\Component\Form\Extension\Core\Type\FormType" extended-type="Symfony\Component\Form\Extension\Core\Type\FormType"/>
+    </service>
+    <service id="nelmio_api_doc.generator.default" class="Nelmio\ApiDocBundle\ApiDocGenerator" public="true">
+      <argument type="tagged" tag="nelmio_api_doc.describer.default"/>
+      <argument type="tagged" tag="nelmio_api_doc.model_describer"/>
+      <call method="setAlternativeNames">
+        <argument type="collection"/>
+      </call>
+    </service>
+    <service id="nelmio_api_doc.describers.route.default" class="Nelmio\ApiDocBundle\Describer\RouteDescriber" public="false">
+      <tag name="nelmio_api_doc.describer.default" priority="-400"/>
+      <argument type="service" id="nelmio_api_doc.routes.default"/>
+      <argument type="service" id="nelmio_api_doc.controller_reflector"/>
+      <argument type="tagged" tag="nelmio_api_doc.route_describer"/>
+    </service>
+    <service id="nelmio_api_doc.describers.swagger_php.default" class="Nelmio\ApiDocBundle\Describer\SwaggerPhpDescriber" public="false">
+      <tag name="nelmio_api_doc.describer.default" priority="-200"/>
+      <argument type="service" id="nelmio_api_doc.routes.default"/>
+      <argument type="service" id="nelmio_api_doc.controller_reflector"/>
+      <argument type="service" id="annotations.cached_reader"/>
+      <argument type="service" id="logger"/>
+    </service>
+    <service id="nelmio_api_doc.describers.config.default" class="Nelmio\ApiDocBundle\Describer\ExternalDocDescriber" public="false">
+      <tag name="nelmio_api_doc.describer.default" priority="990"/>
+      <argument type="collection"/>
+      <argument>true</argument>
+    </service>
+    <service id="nelmio_api_doc.routes.default" class="Symfony\Component\Routing\RouteCollection" public="false">
+      <argument type="service">
+        <service class="Symfony\Component\Routing\RouteCollection">
+          <factory service="router.default" method="getRouteCollection"/>
+        </service>
+      </argument>
+      <factory method="filter">
+        <service class="Nelmio\ApiDocBundle\Routing\FilteredRouteCollectionBuilder">
+          <argument type="service" id="annotations.cached_reader"/>
+          <argument type="service" id="nelmio_api_doc.controller_reflector"/>
+          <argument>default</argument>
+          <argument type="collection">
+            <argument key="path_patterns" type="collection">
+              <argument>^/api(?!/doc$)</argument>
+            </argument>
+            <argument key="host_patterns" type="collection"/>
+            <argument key="with_annotation">false</argument>
+          </argument>
+        </service>
+      </factory>
+    </service>
+    <service id="nelmio_api_doc.generator_locator" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="default" type="service" id="nelmio_api_doc.generator.default"/>
+      </argument>
+    </service>
+    <service id="nelmio_api_doc.route_describers.php_doc" class="Nelmio\ApiDocBundle\RouteDescriber\PhpDocDescriber" public="false">
+      <tag name="nelmio_api_doc.route_describer" priority="-1000"/>
+    </service>
+    <service id="nelmio_api_doc.route_describers.fos_rest" class="Nelmio\ApiDocBundle\RouteDescriber\FosRestDescriber" public="false">
+      <tag name="nelmio_api_doc.route_describer" priority="-300"/>
+      <argument type="service" id="annotations.cached_reader"/>
+    </service>
+    <service id=".1_Request~WHQ3izl" class="Symfony\Component\HttpFoundation\Request" public="false"/>
+    <service id="nelmio_api_doc.describers.api_platform" class="Nelmio\ApiDocBundle\Describer\ApiPlatformDescriber" public="false">
+      <tag name="nelmio_api_doc.describer" priority="-100"/>
+      <tag name="nelmio_api_doc.describer.default" priority="-100"/>
+      <argument type="service" id="nelmio_api_doc.describers.api_platform.documentation"/>
+      <argument type="service" id="api_platform.swagger.normalizer.api_gateway"/>
+    </service>
+    <service id="nelmio_api_doc.describers.api_platform.documentation" class="ApiPlatform\Core\Documentation\Documentation" public="false">
+      <argument type="service" id=".1_Request~WHQ3izl"/>
+      <factory service="api_platform.action.documentation" method="__invoke"/>
+    </service>
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\CompteController" class="App\Controller\CompteController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\CompteController" class="App\Controller\CompteController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\CompteController" class="App\Controller\CompteController" autowire="true" autoconfigure="true" abstract="true"/>
@@ -4966,6 +5099,36 @@
         <argument key="validator" type="service" id="debug.validator"/>
       </argument>
     </service>
+    <service id=".service_locator.iW_buO_" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="partenaire" type="service" id=".errored..service_locator.iW_buO_.App\Entity\Partenaire"/>
+        <argument key="partenaireRepository" type="service" id="App\Repository\PartenaireRepository"/>
+        <argument key="serializer" type="service" id="serializer"/>
+      </argument>
+    </service>
+    <service id=".service_locator.eIEYWuf" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="partenaireRepository" type="service" id="App\Repository\PartenaireRepository"/>
+        <argument key="serializer" type="service" id="serializer"/>
+      </argument>
+    </service>
+    <service id=".service_locator.fmbWqv." class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="serializer" type="service" id="serializer"/>
+        <argument key="transaction" type="service" id=".errored..service_locator.fmbWqv..App\Entity\Transaction"/>
+        <argument key="transactionRepository" type="service" id="App\Repository\TransactionRepository"/>
+      </argument>
+    </service>
+    <service id=".service_locator.k6pF5Cm" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="serializer" type="service" id="serializer"/>
+        <argument key="transactionRepository" type="service" id="App\Repository\TransactionRepository"/>
+      </argument>
+    </service>
     <service id=".service_locator.JBoVXlr" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -4973,20 +5136,28 @@
         <argument key="passwordEncoder" type="service" id="security.user_password_encoder.generic"/>
       </argument>
     </service>
-    <service id=".service_locator.FrhVvm2" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+    <service id=".service_locator.UG8jfOt" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Controller\CompteController::addcompte" type="service" id=".service_locator.ZIsCxOI"/>
         <argument key="App\Controller\DepotController::addDepot" type="service" id=".service_locator.ZIsCxOI"/>
         <argument key="App\Controller\PartenaireController::addPartenaire" type="service" id=".service_locator.k22NER8"/>
+        <argument key="App\Controller\PartenaireController::list" type="service" id=".service_locator.eIEYWuf"/>
+        <argument key="App\Controller\PartenaireController::show" type="service" id=".service_locator.iW_buO_"/>
         <argument key="App\Controller\PartenaireController::updatePartenaire" type="service" id=".service_locator.fDbIXxi"/>
         <argument key="App\Controller\TransactionController::addTransaction" type="service" id=".service_locator.ZIsCxOI"/>
+        <argument key="App\Controller\TransactionController::list" type="service" id=".service_locator.k6pF5Cm"/>
+        <argument key="App\Controller\TransactionController::show" type="service" id=".service_locator.fmbWqv."/>
         <argument key="App\Controller\UserController::addUser" type="service" id=".service_locator.JBoVXlr"/>
         <argument key="App\Controller\CompteController:addcompte" type="service" id=".service_locator.ZIsCxOI"/>
         <argument key="App\Controller\DepotController:addDepot" type="service" id=".service_locator.ZIsCxOI"/>
         <argument key="App\Controller\PartenaireController:addPartenaire" type="service" id=".service_locator.k22NER8"/>
+        <argument key="App\Controller\PartenaireController:list" type="service" id=".service_locator.eIEYWuf"/>
+        <argument key="App\Controller\PartenaireController:show" type="service" id=".service_locator.iW_buO_"/>
         <argument key="App\Controller\PartenaireController:updatePartenaire" type="service" id=".service_locator.fDbIXxi"/>
         <argument key="App\Controller\TransactionController:addTransaction" type="service" id=".service_locator.ZIsCxOI"/>
+        <argument key="App\Controller\TransactionController:list" type="service" id=".service_locator.k6pF5Cm"/>
+        <argument key="App\Controller\TransactionController:show" type="service" id=".service_locator.fmbWqv."/>
         <argument key="App\Controller\UserController:addUser" type="service" id=".service_locator.JBoVXlr"/>
       </argument>
     </service>
@@ -5107,6 +5278,10 @@
       <argument>null</argument>
       <argument>null</argument>
       <argument type="collection"/>
+    </service>
+    <service id="nelmio_api_doc.model_describers.form" class="Nelmio\ApiDocBundle\ModelDescriber\FormModelDescriber" public="false">
+      <tag name="nelmio_api_doc.model_describer" priority="100"/>
+      <argument type="service" id="form.factory"/>
     </service>
     <service id="logger" class="Symfony\Component\HttpKernel\Log\Logger" public="false"/>
     <service id=".service_locator.UwRI0uT" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
@@ -5285,12 +5460,12 @@
       <argument type="service" id="security.token_storage"/>
     </service>
     <service id="debug.argument_resolver.service.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver" public="false">
-      <argument type="service" id=".service_locator.FrhVvm2"/>
+      <argument type="service" id=".service_locator.UG8jfOt"/>
     </service>
     <service id="debug.argument_resolver.default.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver" public="false"/>
     <service id="debug.argument_resolver.variadic.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\VariadicValueResolver" public="false"/>
     <service id="debug.argument_resolver.not_tagged_controller.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver" public="false">
-      <argument type="service" id=".service_locator.FrhVvm2"/>
+      <argument type="service" id=".service_locator.UG8jfOt"/>
     </service>
     <service id="api_platform.swagger.normalizer.api_gateway.inner" class="ApiPlatform\Core\Swagger\Serializer\DocumentationNormalizer" public="false">
       <argument type="service" id="api_platform.metadata.resource.metadata_factory.cached"/>
@@ -5328,6 +5503,8 @@
       <argument type="service" id="api_platform.path_segment_name_generator.underscore"/>
     </service>
     <service id=".errored..service_locator.fDbIXxi.App\Entity\Partenaire" class="App\Entity\Partenaire"/>
+    <service id=".errored..service_locator.iW_buO_.App\Entity\Partenaire" class="App\Entity\Partenaire"/>
+    <service id=".errored..service_locator.fmbWqv..App\Entity\Transaction" class="App\Entity\Transaction"/>
     <service id="console.command_loader" class="Symfony\Component\Console\CommandLoader\ContainerCommandLoader" public="true">
       <argument type="service" id=".service_locator.qudbnW5"/>
       <argument type="collection">
@@ -5730,7 +5907,8 @@
     <service id="fos_rest.router" alias="router.default"/>
     <service id="fos_rest.view_handler" alias="fos_rest.view_handler.default" public="true"/>
     <service id="fos_rest.inflector" alias="fos_rest.inflector.doctrine"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.FrhVvm2"/>
+    <service id="nelmio_api_doc.generator" alias="nelmio_api_doc.generator.default" public="true"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.UG8jfOt"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem" public="false"/>
     <service id="twig.loader" alias="twig.loader.native_filesystem"/>
     <service id="api_platform.name_converter" alias="serializer.name_converter.metadata_aware"/>
@@ -5738,6 +5916,7 @@
     <service id="Psr\Log\LoggerInterface" alias="logger" public="false"/>
     <service id=".service_locator.b1qho2Z" alias="api_platform.serializer_locator" public="false"/>
     <service id=".service_locator.YUq96kP" alias="api_platform.filter_locator" public="false"/>
+    <service id=".service_locator.ueSc.AG" alias="nelmio_api_doc.generator_locator" public="false"/>
     <service id="validator" alias="debug.validator" public="true"/>
     <service id="api_platform.metadata.property.metadata_factory.property_info.inner" alias="api_platform.metadata.property.metadata_factory.xml" public="false"/>
     <service id="api_platform.metadata.property.metadata_factory.inherited.inner" alias="api_platform.metadata.property.metadata_factory.property_info" public="false"/>

@@ -20,13 +20,13 @@ class DepotController extends AbstractController
     /**
      * @Route("/", name="depot")
      */
+
     public function index()
     {
         return $this->render('depot/index.html.twig', [
             'controller_name' => 'DepotController',
         ]);
     }
-
 
     /**
      * @Route("/depot", name="add_user", methods={"POST"})
@@ -39,17 +39,18 @@ class DepotController extends AbstractController
 
             $depot->setDate(new \Datetime());
             $depot->setMontant($values->montant);
-            $part=$this->getDoctrine()->getRepository(Partenaire::class)->find($values->partenaire_id);
+            $part=$this->getDoctrine()->getRepository(Partenaire::class)->find($values->partenaire_id); 
+            
+            $part->setSolde($part->getSolde() + $values->montant);
             $depot->setPartenaire($part);
             $entityManager->persist($depot);
             $entityManager->flush();
 
             $data = [
                 'status' => 201,
-                'message' => 'Le depot a été fait avec succée'
+                'message' => 'Une depot a été faite'
             ];
 
-            return new JsonResponse($data, 201);
-        
+            return new JsonResponse($data, 201);   
     }
 }

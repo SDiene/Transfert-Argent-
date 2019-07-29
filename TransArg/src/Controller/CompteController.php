@@ -35,6 +35,7 @@ class CompteController extends AbstractController
             $compte = new Compte();
 
             $compte->setNumerocompte($values->numerocompte);
+            $compte->setSolde($values->solde);
             $part=$this->getDoctrine()->getRepository(Partenaire::class)->find($values->partenaire_id);
             $compte->setPartenaire($part);
             $entityManager->persist($compte);

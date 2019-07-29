@@ -5,11 +5,14 @@ namespace App\Controller;
 use App\Entity\Transaction;
 use App\Entity\User;
 
+use App\Repository\TransactionRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Serializer\SerializerInterface;
 
 /**
  * @Route("/api",name="_api")
@@ -51,4 +54,35 @@ class TransactionController extends AbstractController
             return new JsonResponse($data, 201);
     }
 
+    /**
+     * @Route("/transaction/{id}", name="show_transaction", methods={"GET"})
+     */
+
+    public function show(Transaction $transaction, TransactionRepository $transactionRepository, SerializerInterface $serializer)
+    {
+        $transaction = $transactionRepository->find($transaction->getId());
+        $data = $serializer->serialize($transaction, 'json', [
+            'groups' => ['show']
+        ]);
+        return new Response($data, 200, [
+            'Content-Type' => 'application/json'
+        ]);
+    }
+
+    /**
+     * @Route("/transaction/{page<\d+>?1}", name="list_transaction", methods={"GET"})
+    */
+
+    public function list(Request $request, TransactionRepository $transactionRepository, SerializerInterface $serializer)
+    {
+        $page = $request->query->get('page');
+        if(is_null($page) || $page < 1) {
+            $page = 1;
+        }
+        $transaction = $transactionRepository->findAll($page, getenv('LIMIT')); 
+        $data = $serializer->serialize($transaction, 'json', [ 'groups' => ['list'] ]);
+        return new Response($data, 200, [
+            'Content-Type' => 'application/json'
+        ]);
+    }
 }

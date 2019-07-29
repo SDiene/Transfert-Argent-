@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PartenaireRepository")
@@ -15,36 +16,43 @@ class Partenaire
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups({"list", "show"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"list", "show"})
      */
     private $nomentreprise;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"list", "show"})
      */
     private $ninea;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"list", "show"})
      */
     private $adresse;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"list", "show"})
      */
     private $email;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups({"list", "show"})
      */
     private $tel;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Compte", mappedBy="partenaire")
+     * 
      */
     private $compte;
 

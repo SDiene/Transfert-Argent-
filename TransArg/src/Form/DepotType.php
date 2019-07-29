@@ -3,13 +3,10 @@
 namespace App\Form;
 
 use App\Entity\Depot;
-use App\Entity\Partenaire;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
 
 
 class DepotType extends AbstractType
@@ -17,14 +14,9 @@ class DepotType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('date',DateType::class,[
-                'widget' => 'single_text'
-            ])
+            ->add('date')
             ->add('montant')
-            ->add('partenaire',EntityType::class,[
-                'class'=>Partenaire::class,
-                'choice_label'=>'partenaire_id'
-            ])
+            ->add('partenaire')
         ;
     }
 
