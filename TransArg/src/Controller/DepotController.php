@@ -41,7 +41,7 @@ class DepotController extends AbstractController
             $depot->setMontant($values->montant);
             $part=$this->getDoctrine()->getRepository(Partenaire::class)->find($values->partenaire_id); 
             
-            $part->setSolde($part->getSolde() + $values->montant);
+            //$part->setSolde($part->getSolde() + $values->montant);
             $depot->setPartenaire($part);
             $entityManager->persist($depot);
             $entityManager->flush();

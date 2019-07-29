@@ -109,4 +109,5 @@ class PartenaireController extends AbstractController
             'Content-Type' => 'application/json'
         ]);
     }
+
 }
