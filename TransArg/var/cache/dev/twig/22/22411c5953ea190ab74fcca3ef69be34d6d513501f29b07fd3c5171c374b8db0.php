@@ -154,6 +154,6 @@ class __TwigTemplate_cd3546c6c2fd7855ad9ebd200f23e26d31252c51e3b2c68e4624d3496a8
     </ul>
 </div>
 {% endblock %}
-", "compte/index.html.twig", "/home/diene/Documents/Projet-Wari/TransArg/templates/compte/index.html.twig");
+", "compte/index.html.twig", "/home/yahya/Documents/symfoni/gitDosssier/TransArg/templates/compte/index.html.twig");
     }
 }

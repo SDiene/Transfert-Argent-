@@ -320,6 +320,6 @@ $context["trace"], "level", [], "any", false, false, false, 64) == 2)) {
     Note: These matching logs are based on the current router configuration,
     which might differ from the configuration used when profiling this request.
 </p>
-", "@WebProfiler/Router/panel.html.twig", "/home/diene/Documents/Projet-Wari/TransArg/vendor/symfony/web-profiler-bundle/Resources/views/Router/panel.html.twig");
+", "@WebProfiler/Router/panel.html.twig", "/home/yahya/Documents/symfoni/gitDosssier/TransArg/vendor/symfony/web-profiler-bundle/Resources/views/Router/panel.html.twig");
     }
 }

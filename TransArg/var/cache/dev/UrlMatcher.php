@@ -25,7 +25,9 @@ return [
         '/api/partenaire' => [[['_route' => 'apiadd_depot', '_controller' => 'App\\Controller\\PartenaireController::addPartenaire'], null, ['POST' => 0], null, false, false, null]],
         '/api/transaction' => [[['_route' => '_apiadd_transaction', '_controller' => 'App\\Controller\\TransactionController::addTransaction'], null, ['POST' => 0], null, false, false, null]],
         '/api/user' => [[['_route' => 'add_user', '_controller' => 'App\\Controller\\UserController::addUser'], null, ['POST' => 0], null, false, false, null]],
+        '/api/login' => [[['_route' => 'login', '_controller' => 'App\\Controller\\UserController::login'], null, ['POST' => 0], null, false, false, null]],
         '/api/doc.json' => [[['_route' => 'app.swagger', '_controller' => 'nelmio_api_doc.controller.swagger'], null, ['GET' => 0], null, false, false, null]],
+        '/api/login_check' => [[['_route' => 'api_login_check'], null, null, null, false, false, null]],
     ],
     [ // $regexpList
         0 => '{^(?'
@@ -56,11 +58,12 @@ return [
                             .'|/([^/]++)(*:257)'
                             .'|(?:/(\\d+))?(*:276)'
                         .')'
+                        .'|user/([^/]++)(*:298)'
                     .')'
-                    .'|(?:/(index)(?:\\.([^/]++))?)?(*:314)'
+                    .'|(?:/(index)(?:\\.([^/]++))?)?(*:335)'
                     .'|/(?'
-                        .'|docs(?:\\.([^/]++))?(*:345)'
-                        .'|contexts/(.+)(?:\\.([^/]++))?(*:381)'
+                        .'|docs(?:\\.([^/]++))?(*:366)'
+                        .'|contexts/(.+)(?:\\.([^/]++))?(*:402)'
                     .')'
                 .')'
             .')/?$}sDu',
@@ -80,9 +83,10 @@ return [
         225 => [[['_route' => 'apilist_partenaire', 'page' => '1', '_controller' => 'App\\Controller\\PartenaireController::list'], ['page'], ['GET' => 0], null, false, true, null]],
         257 => [[['_route' => '_apishow_transaction', '_controller' => 'App\\Controller\\TransactionController::show'], ['id'], ['GET' => 0], null, false, true, null]],
         276 => [[['_route' => '_apilist_transaction', 'page' => '1', '_controller' => 'App\\Controller\\TransactionController::list'], ['page'], ['GET' => 0], null, false, true, null]],
-        314 => [[['_route' => 'api_entrypoint', '_controller' => 'api_platform.action.entrypoint', '_format' => '', '_api_respond' => 'true', 'index' => 'index'], ['index', '_format'], null, null, false, true, null]],
-        345 => [[['_route' => 'api_doc', '_controller' => 'api_platform.action.documentation', '_format' => '', '_api_respond' => 'true'], ['_format'], null, null, false, true, null]],
-        381 => [
+        298 => [[['_route' => 'update_user', '_controller' => 'App\\Controller\\UserController::updatte'], ['id'], ['PUT' => 0], null, false, true, null]],
+        335 => [[['_route' => 'api_entrypoint', '_controller' => 'api_platform.action.entrypoint', '_format' => '', '_api_respond' => 'true', 'index' => 'index'], ['index', '_format'], null, null, false, true, null]],
+        366 => [[['_route' => 'api_doc', '_controller' => 'api_platform.action.documentation', '_format' => '', '_api_respond' => 'true'], ['_format'], null, null, false, true, null]],
+        402 => [
             [['_route' => 'api_jsonld_context', '_controller' => 'api_platform.jsonld.action.context', '_format' => 'jsonld', '_api_respond' => 'true'], ['shortName', '_format'], null, null, false, true, null],
             [null, null, null, null, false, false, 0],
         ],

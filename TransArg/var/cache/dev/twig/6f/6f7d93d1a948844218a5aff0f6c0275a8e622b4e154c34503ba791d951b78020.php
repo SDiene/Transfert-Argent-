@@ -792,6 +792,6 @@ class __TwigTemplate_755615bfa6d716cca50c9906049c249379a810b4e94cdbae9b692502314
         </table>
     {% endif %}
 {% endblock %}
-", "@WebProfiler/Collector/config.html.twig", "/home/diene/Documents/Projet-Wari/TransArg/vendor/symfony/web-profiler-bundle/Resources/views/Collector/config.html.twig");
+", "@WebProfiler/Collector/config.html.twig", "/home/yahya/Documents/symfoni/gitDosssier/TransArg/vendor/symfony/web-profiler-bundle/Resources/views/Collector/config.html.twig");
     }
 }

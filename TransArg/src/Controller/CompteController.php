@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Doctrine\ORM\EntityManagerInterface;
 /**
  * @Route("/api",name="_api")
@@ -27,6 +28,7 @@ class CompteController extends AbstractController
 
     /**
      * @Route("/compte", name="new_compte", methods={"POST"})
+     * @IsGranted("ROLE_PARTENAIRE")
     */
 
     public function addcompte(Request $request, EntityManagerInterface $entityManager)
