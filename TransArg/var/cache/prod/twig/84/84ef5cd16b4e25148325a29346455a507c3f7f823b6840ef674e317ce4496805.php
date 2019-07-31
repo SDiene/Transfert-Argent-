@@ -54,6 +54,6 @@ class __TwigTemplate_02d32daf867c47669a94833b3db31500b5a48a633366a66e1a87ebb4c51
 
     public function getSourceContext()
     {
-        return new Source("", "@Framework/FormTable/hidden_row.html.php", "/home/diene/Documents/Projet-Wari/TransArg/vendor/symfony/framework-bundle/Resources/views/FormTable/hidden_row.html.php");
+        return new Source("", "@Framework/FormTable/hidden_row.html.php", "/home/diene/Documents/Transfert-Argent-/TransArg/vendor/symfony/framework-bundle/Resources/views/FormTable/hidden_row.html.php");
     }
 }

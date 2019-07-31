@@ -53,6 +53,6 @@ class __TwigTemplate_8579c35a4e180a30bc8b91bea64c5f2127b0ea6472f77e213a9fd9a4e55
 
     public function getSourceContext()
     {
-        return new Source("", "@Doctrine/Collector/icon.svg", "/home/diene/Documents/Projet-Wari/TransArg/vendor/doctrine/doctrine-bundle/Resources/views/Collector/icon.svg");
+        return new Source("", "@Doctrine/Collector/icon.svg", "/home/diene/Documents/Transfert-Argent-/TransArg/vendor/doctrine/doctrine-bundle/Resources/views/Collector/icon.svg");
     }
 }

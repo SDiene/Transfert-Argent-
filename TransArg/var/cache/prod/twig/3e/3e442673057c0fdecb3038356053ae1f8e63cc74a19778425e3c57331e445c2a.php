@@ -66,6 +66,6 @@ We will fix it as soon as possible. Sorry for any inconvenience caused.
 
     public function getSourceContext()
     {
-        return new Source("", "@Twig/Exception/error.txt.twig", "/home/diene/Documents/Projet-Wari/TransArg/vendor/symfony/twig-bundle/Resources/views/Exception/error.txt.twig");
+        return new Source("", "@Twig/Exception/error.txt.twig", "/home/diene/Documents/Transfert-Argent-/TransArg/vendor/symfony/twig-bundle/Resources/views/Exception/error.txt.twig");
     }
 }

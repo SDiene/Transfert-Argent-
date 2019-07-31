@@ -50,6 +50,6 @@ class __TwigTemplate_695b84d4c59ff36fbe2b0d755e5f06691dbe12f2c3252c8c4dc5b1168e0
 
     public function getSourceContext()
     {
-        return new Source("", "@Twig/images/icon-book.svg", "/home/diene/Documents/Projet-Wari/TransArg/vendor/symfony/twig-bundle/Resources/views/images/icon-book.svg");
+        return new Source("", "@Twig/images/icon-book.svg", "/home/diene/Documents/Transfert-Argent-/TransArg/vendor/symfony/twig-bundle/Resources/views/images/icon-book.svg");
     }
 }

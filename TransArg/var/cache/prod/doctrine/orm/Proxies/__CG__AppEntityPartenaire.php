@@ -64,10 +64,10 @@ class Partenaire extends \App\Entity\Partenaire implements \Doctrine\ORM\Proxy\P
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return ['__isInitialized__', '' . "\0" . 'App\\Entity\\Partenaire' . "\0" . 'id', '' . "\0" . 'App\\Entity\\Partenaire' . "\0" . 'nomentreprise', '' . "\0" . 'App\\Entity\\Partenaire' . "\0" . 'ninea', '' . "\0" . 'App\\Entity\\Partenaire' . "\0" . 'adresse', '' . "\0" . 'App\\Entity\\Partenaire' . "\0" . 'email', '' . "\0" . 'App\\Entity\\Partenaire' . "\0" . 'tel', '' . "\0" . 'App\\Entity\\Partenaire' . "\0" . 'utilisateur', '' . "\0" . 'App\\Entity\\Partenaire' . "\0" . 'compte', '' . "\0" . 'App\\Entity\\Partenaire' . "\0" . 'users', '' . "\0" . 'App\\Entity\\Partenaire' . "\0" . 'user', '' . "\0" . 'App\\Entity\\Partenaire' . "\0" . 'depot'];
+            return ['__isInitialized__', '' . "\0" . 'App\\Entity\\Partenaire' . "\0" . 'id', '' . "\0" . 'App\\Entity\\Partenaire' . "\0" . 'nomentreprise', '' . "\0" . 'App\\Entity\\Partenaire' . "\0" . 'ninea', '' . "\0" . 'App\\Entity\\Partenaire' . "\0" . 'adresse', '' . "\0" . 'App\\Entity\\Partenaire' . "\0" . 'email', '' . "\0" . 'App\\Entity\\Partenaire' . "\0" . 'tel', '' . "\0" . 'App\\Entity\\Partenaire' . "\0" . 'compte', '' . "\0" . 'App\\Entity\\Partenaire' . "\0" . 'depot', '' . "\0" . 'App\\Entity\\Partenaire' . "\0" . 'users', '' . "\0" . 'App\\Entity\\Partenaire' . "\0" . 'description'];
         }
 
-        return ['__isInitialized__', '' . "\0" . 'App\\Entity\\Partenaire' . "\0" . 'id', '' . "\0" . 'App\\Entity\\Partenaire' . "\0" . 'nomentreprise', '' . "\0" . 'App\\Entity\\Partenaire' . "\0" . 'ninea', '' . "\0" . 'App\\Entity\\Partenaire' . "\0" . 'adresse', '' . "\0" . 'App\\Entity\\Partenaire' . "\0" . 'email', '' . "\0" . 'App\\Entity\\Partenaire' . "\0" . 'tel', '' . "\0" . 'App\\Entity\\Partenaire' . "\0" . 'utilisateur', '' . "\0" . 'App\\Entity\\Partenaire' . "\0" . 'compte', '' . "\0" . 'App\\Entity\\Partenaire' . "\0" . 'users', '' . "\0" . 'App\\Entity\\Partenaire' . "\0" . 'user', '' . "\0" . 'App\\Entity\\Partenaire' . "\0" . 'depot'];
+        return ['__isInitialized__', '' . "\0" . 'App\\Entity\\Partenaire' . "\0" . 'id', '' . "\0" . 'App\\Entity\\Partenaire' . "\0" . 'nomentreprise', '' . "\0" . 'App\\Entity\\Partenaire' . "\0" . 'ninea', '' . "\0" . 'App\\Entity\\Partenaire' . "\0" . 'adresse', '' . "\0" . 'App\\Entity\\Partenaire' . "\0" . 'email', '' . "\0" . 'App\\Entity\\Partenaire' . "\0" . 'tel', '' . "\0" . 'App\\Entity\\Partenaire' . "\0" . 'compte', '' . "\0" . 'App\\Entity\\Partenaire' . "\0" . 'depot', '' . "\0" . 'App\\Entity\\Partenaire' . "\0" . 'users', '' . "\0" . 'App\\Entity\\Partenaire' . "\0" . 'description'];
     }
 
     /**
@@ -301,7 +301,7 @@ class Partenaire extends \App\Entity\Partenaire implements \Doctrine\ORM\Proxy\P
     /**
      * {@inheritDoc}
      */
-    public function getCompte(): ?\App\Entity\Compte
+    public function getCompte(): \Doctrine\Common\Collections\Collection
     {
 
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'getCompte', []);
@@ -312,12 +312,56 @@ class Partenaire extends \App\Entity\Partenaire implements \Doctrine\ORM\Proxy\P
     /**
      * {@inheritDoc}
      */
-    public function setCompte(\App\Entity\Compte $compte): \App\Entity\Partenaire
+    public function addCompte(\App\Entity\Compte $compte): \App\Entity\Partenaire
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setCompte', [$compte]);
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'addCompte', [$compte]);
 
-        return parent::setCompte($compte);
+        return parent::addCompte($compte);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function removeCompte(\App\Entity\Compte $compte): \App\Entity\Partenaire
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'removeCompte', [$compte]);
+
+        return parent::removeCompte($compte);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getDepot(): \Doctrine\Common\Collections\Collection
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getDepot', []);
+
+        return parent::getDepot();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function addDepot(\App\Entity\Depot $depot): \App\Entity\Partenaire
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'addDepot', [$depot]);
+
+        return parent::addDepot($depot);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function removeDepot(\App\Entity\Depot $depot): \App\Entity\Partenaire
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'removeDepot', [$depot]);
+
+        return parent::removeDepot($depot);
     }
 
     /**
@@ -356,45 +400,23 @@ class Partenaire extends \App\Entity\Partenaire implements \Doctrine\ORM\Proxy\P
     /**
      * {@inheritDoc}
      */
-    public function getUser(): ?\App\Entity\User
+    public function getDescription(): ?string
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getUser', []);
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getDescription', []);
 
-        return parent::getUser();
+        return parent::getDescription();
     }
 
     /**
      * {@inheritDoc}
      */
-    public function setUser(?\App\Entity\User $user): \App\Entity\Partenaire
+    public function setDescription(string $description): \App\Entity\Partenaire
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setUser', [$user]);
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setDescription', [$description]);
 
-        return parent::setUser($user);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getDepot(): ?\App\Entity\Depot
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getDepot', []);
-
-        return parent::getDepot();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function setDepot(?\App\Entity\Depot $depot): \App\Entity\Partenaire
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setDepot', [$depot]);
-
-        return parent::setDepot($depot);
+        return parent::setDescription($description);
     }
 
 }

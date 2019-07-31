@@ -50,6 +50,6 @@ class __TwigTemplate_88d86ae7aa1cd10687d8fd19a1b8e28e465e0efb87a9f79132b7906396f
 
     public function getSourceContext()
     {
-        return new Source("", "@Twig/images/favicon.png.base64", "/home/diene/Documents/Projet-Wari/TransArg/vendor/symfony/twig-bundle/Resources/views/images/favicon.png.base64");
+        return new Source("", "@Twig/images/favicon.png.base64", "/home/diene/Documents/Transfert-Argent-/TransArg/vendor/symfony/twig-bundle/Resources/views/images/favicon.png.base64");
     }
 }

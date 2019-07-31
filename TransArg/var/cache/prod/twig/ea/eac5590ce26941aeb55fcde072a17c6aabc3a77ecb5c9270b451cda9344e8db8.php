@@ -50,6 +50,6 @@ class __TwigTemplate_964977c405548ccdecf5144776b1e0deda7d2f16b16d928309e38fb81e5
 
     public function getSourceContext()
     {
-        return new Source("", "@ApiPlatform/DataCollector/api-platform-icon.svg", "/home/diene/Documents/Projet-Wari/TransArg/vendor/api-platform/core/src/Bridge/Symfony/Bundle/Resources/views/DataCollector/api-platform-icon.svg");
+        return new Source("", "@ApiPlatform/DataCollector/api-platform-icon.svg", "/home/diene/Documents/Transfert-Argent-/TransArg/vendor/api-platform/core/src/Bridge/Symfony/Bundle/Resources/views/DataCollector/api-platform-icon.svg");
     }
 }

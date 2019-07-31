@@ -71,6 +71,6 @@ class __TwigTemplate_7e78105c89c24ebc611435b8bced8c86771d4e09edf542cd1bcfc2df2c8
 
     public function getSourceContext()
     {
-        return new Source("", "@Twig/Exception/trace.txt.twig", "/home/diene/Documents/Projet-Wari/TransArg/vendor/symfony/twig-bundle/Resources/views/Exception/trace.txt.twig");
+        return new Source("", "@Twig/Exception/trace.txt.twig", "/home/diene/Documents/Transfert-Argent-/TransArg/vendor/symfony/twig-bundle/Resources/views/Exception/trace.txt.twig");
     }
 }

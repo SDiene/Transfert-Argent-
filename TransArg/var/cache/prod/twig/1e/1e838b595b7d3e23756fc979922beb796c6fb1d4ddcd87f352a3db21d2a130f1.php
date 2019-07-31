@@ -54,6 +54,6 @@ class __TwigTemplate_1bcc2389a4207c8f0a4e01e7b7703c0e02abfe51c4c1c7f77e0b9c0719a
 
     public function getSourceContext()
     {
-        return new Source("", "@Framework/Form/checkbox_widget.html.php", "/home/diene/Documents/Projet-Wari/TransArg/vendor/symfony/framework-bundle/Resources/views/Form/checkbox_widget.html.php");
+        return new Source("", "@Framework/Form/checkbox_widget.html.php", "/home/diene/Documents/Transfert-Argent-/TransArg/vendor/symfony/framework-bundle/Resources/views/Form/checkbox_widget.html.php");
     }
 }

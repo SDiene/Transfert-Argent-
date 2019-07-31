@@ -51,6 +51,6 @@ class __TwigTemplate_fa852a71c2ad5be1461247bf21f10e29e5b76b330143b7f1bf65a379861
 
     public function getSourceContext()
     {
-        return new Source("", "@Framework/Form/widget_attributes.html.php", "/home/diene/Documents/Projet-Wari/TransArg/vendor/symfony/framework-bundle/Resources/views/Form/widget_attributes.html.php");
+        return new Source("", "@Framework/Form/widget_attributes.html.php", "/home/diene/Documents/Transfert-Argent-/TransArg/vendor/symfony/framework-bundle/Resources/views/Form/widget_attributes.html.php");
     }
 }

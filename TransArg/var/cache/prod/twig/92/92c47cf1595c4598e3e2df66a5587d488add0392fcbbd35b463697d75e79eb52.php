@@ -131,6 +131,6 @@ class __TwigTemplate_59d87ebb83d71cbacd2aaf65d73f1a8015a61f49bf6eabaa3db66516ef6
 
     public function getSourceContext()
     {
-        return new Source("", "@Doctrine/Collector/explain.html.twig", "/home/diene/Documents/Projet-Wari/TransArg/vendor/doctrine/doctrine-bundle/Resources/views/Collector/explain.html.twig");
+        return new Source("", "@Doctrine/Collector/explain.html.twig", "/home/diene/Documents/Transfert-Argent-/TransArg/vendor/doctrine/doctrine-bundle/Resources/views/Collector/explain.html.twig");
     }
 }

@@ -50,6 +50,6 @@ class __TwigTemplate_b5dd0368bf7980459dbe6041a188dcfa32f8ac34eaf8bf90b60ad3204a0
 
     public function getSourceContext()
     {
-        return new Source("", "@Framework/Form/color_widget.html.php", "/home/diene/Documents/Projet-Wari/TransArg/vendor/symfony/framework-bundle/Resources/views/Form/color_widget.html.php");
+        return new Source("", "@Framework/Form/color_widget.html.php", "/home/diene/Documents/Transfert-Argent-/TransArg/vendor/symfony/framework-bundle/Resources/views/Form/color_widget.html.php");
     }
 }

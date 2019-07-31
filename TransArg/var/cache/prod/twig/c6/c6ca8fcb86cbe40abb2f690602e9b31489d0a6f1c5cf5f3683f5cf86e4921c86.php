@@ -56,6 +56,6 @@ class __TwigTemplate_f00abc18f7c4619a1e9e24b87e624759e4123286298af4c86149919aa9d
 
     public function getSourceContext()
     {
-        return new Source("", "@Twig/Exception/exception.json.twig", "/home/diene/Documents/Projet-Wari/TransArg/vendor/symfony/twig-bundle/Resources/views/Exception/exception.json.twig");
+        return new Source("", "@Twig/Exception/exception.json.twig", "/home/diene/Documents/Transfert-Argent-/TransArg/vendor/symfony/twig-bundle/Resources/views/Exception/exception.json.twig");
     }
 }

@@ -98,6 +98,6 @@ class __TwigTemplate_1147fcd552a854d33a8df4eb831ce7a81441600b14e628c8ea23eef92a1
 
     public function getSourceContext()
     {
-        return new Source("", "@ApiPlatform/Graphiql/index.html.twig", "/home/diene/Documents/Projet-Wari/TransArg/vendor/api-platform/core/src/Bridge/Symfony/Bundle/Resources/views/Graphiql/index.html.twig");
+        return new Source("", "@ApiPlatform/Graphiql/index.html.twig", "/home/diene/Documents/Transfert-Argent-/TransArg/vendor/api-platform/core/src/Bridge/Symfony/Bundle/Resources/views/Graphiql/index.html.twig");
     }
 }

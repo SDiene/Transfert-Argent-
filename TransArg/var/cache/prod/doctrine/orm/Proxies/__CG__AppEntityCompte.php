@@ -64,10 +64,10 @@ class Compte extends \App\Entity\Compte implements \Doctrine\ORM\Proxy\Proxy
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return ['__isInitialized__', '' . "\0" . 'App\\Entity\\Compte' . "\0" . 'id', '' . "\0" . 'App\\Entity\\Compte' . "\0" . 'numerocompte'];
+            return ['__isInitialized__', '' . "\0" . 'App\\Entity\\Compte' . "\0" . 'id', '' . "\0" . 'App\\Entity\\Compte' . "\0" . 'numerocompte', '' . "\0" . 'App\\Entity\\Compte' . "\0" . 'partenaire', '' . "\0" . 'App\\Entity\\Compte' . "\0" . 'solde', '' . "\0" . 'App\\Entity\\Compte' . "\0" . 'depots'];
         }
 
-        return ['__isInitialized__', '' . "\0" . 'App\\Entity\\Compte' . "\0" . 'id', '' . "\0" . 'App\\Entity\\Compte' . "\0" . 'numerocompte'];
+        return ['__isInitialized__', '' . "\0" . 'App\\Entity\\Compte' . "\0" . 'id', '' . "\0" . 'App\\Entity\\Compte' . "\0" . 'numerocompte', '' . "\0" . 'App\\Entity\\Compte' . "\0" . 'partenaire', '' . "\0" . 'App\\Entity\\Compte' . "\0" . 'solde', '' . "\0" . 'App\\Entity\\Compte' . "\0" . 'depots'];
     }
 
     /**
@@ -208,6 +208,83 @@ class Compte extends \App\Entity\Compte implements \Doctrine\ORM\Proxy\Proxy
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'setNumerocompte', [$numerocompte]);
 
         return parent::setNumerocompte($numerocompte);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getPartenaire(): ?\App\Entity\Partenaire
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getPartenaire', []);
+
+        return parent::getPartenaire();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setPartenaire(?\App\Entity\Partenaire $partenaire): \App\Entity\Compte
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setPartenaire', [$partenaire]);
+
+        return parent::setPartenaire($partenaire);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getSolde(): ?int
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getSolde', []);
+
+        return parent::getSolde();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setSolde(int $solde): \App\Entity\Compte
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setSolde', [$solde]);
+
+        return parent::setSolde($solde);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getDepots(): \Doctrine\Common\Collections\Collection
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getDepots', []);
+
+        return parent::getDepots();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function addDepot(\App\Entity\Depot $depot): \App\Entity\Compte
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'addDepot', [$depot]);
+
+        return parent::addDepot($depot);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function removeDepot(\App\Entity\Depot $depot): \App\Entity\Compte
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'removeDepot', [$depot]);
+
+        return parent::removeDepot($depot);
     }
 
 }

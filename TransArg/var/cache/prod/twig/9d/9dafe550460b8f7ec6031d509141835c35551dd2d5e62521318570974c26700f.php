@@ -255,6 +255,6 @@ header .container { display: flex; justify-content: space-between; }
 
     public function getSourceContext()
     {
-        return new Source("", "@Twig/exception.css.twig", "/home/diene/Documents/Projet-Wari/TransArg/vendor/symfony/twig-bundle/Resources/views/exception.css.twig");
+        return new Source("", "@Twig/exception.css.twig", "/home/diene/Documents/Transfert-Argent-/TransArg/vendor/symfony/twig-bundle/Resources/views/exception.css.twig");
     }
 }

@@ -248,6 +248,6 @@ class __TwigTemplate_fb12564d6bdf30e6e0eb3d80457ff4e4ec9fd21fb4bbc08a812dd24b37b
 
     public function getSourceContext()
     {
-        return new Source("", "@ApiPlatform/SwaggerUi/index.html.twig", "/home/diene/Documents/Projet-Wari/TransArg/vendor/api-platform/core/src/Bridge/Symfony/Bundle/Resources/views/SwaggerUi/index.html.twig");
+        return new Source("", "@ApiPlatform/SwaggerUi/index.html.twig", "/home/diene/Documents/Transfert-Argent-/TransArg/vendor/api-platform/core/src/Bridge/Symfony/Bundle/Resources/views/SwaggerUi/index.html.twig");
     }
 }

@@ -64,10 +64,10 @@ class Depot extends \App\Entity\Depot implements \Doctrine\ORM\Proxy\Proxy
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return ['__isInitialized__', '' . "\0" . 'App\\Entity\\Depot' . "\0" . 'id', '' . "\0" . 'App\\Entity\\Depot' . "\0" . 'date', '' . "\0" . 'App\\Entity\\Depot' . "\0" . 'montant', '' . "\0" . 'App\\Entity\\Depot' . "\0" . 'partenaires'];
+            return ['__isInitialized__', '' . "\0" . 'App\\Entity\\Depot' . "\0" . 'id', '' . "\0" . 'App\\Entity\\Depot' . "\0" . 'date', '' . "\0" . 'App\\Entity\\Depot' . "\0" . 'montant', '' . "\0" . 'App\\Entity\\Depot' . "\0" . 'compte'];
         }
 
-        return ['__isInitialized__', '' . "\0" . 'App\\Entity\\Depot' . "\0" . 'id', '' . "\0" . 'App\\Entity\\Depot' . "\0" . 'date', '' . "\0" . 'App\\Entity\\Depot' . "\0" . 'montant', '' . "\0" . 'App\\Entity\\Depot' . "\0" . 'partenaires'];
+        return ['__isInitialized__', '' . "\0" . 'App\\Entity\\Depot' . "\0" . 'id', '' . "\0" . 'App\\Entity\\Depot' . "\0" . 'date', '' . "\0" . 'App\\Entity\\Depot' . "\0" . 'montant', '' . "\0" . 'App\\Entity\\Depot' . "\0" . 'compte'];
     }
 
     /**
@@ -235,34 +235,23 @@ class Depot extends \App\Entity\Depot implements \Doctrine\ORM\Proxy\Proxy
     /**
      * {@inheritDoc}
      */
-    public function getPartenaires(): \Doctrine\Common\Collections\Collection
+    public function getCompte(): ?\App\Entity\Compte
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getPartenaires', []);
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getCompte', []);
 
-        return parent::getPartenaires();
+        return parent::getCompte();
     }
 
     /**
      * {@inheritDoc}
      */
-    public function addPartenaire(\App\Entity\Partenaire $partenaire): \App\Entity\Depot
+    public function setCompte(?\App\Entity\Compte $compte): \App\Entity\Depot
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'addPartenaire', [$partenaire]);
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setCompte', [$compte]);
 
-        return parent::addPartenaire($partenaire);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function removePartenaire(\App\Entity\Partenaire $partenaire): \App\Entity\Depot
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'removePartenaire', [$partenaire]);
-
-        return parent::removePartenaire($partenaire);
+        return parent::setCompte($compte);
     }
 
 }

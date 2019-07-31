@@ -64,10 +64,10 @@ class Transaction extends \App\Entity\Transaction implements \Doctrine\ORM\Proxy
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return ['__isInitialized__', '' . "\0" . 'App\\Entity\\Transaction' . "\0" . 'id', '' . "\0" . 'App\\Entity\\Transaction' . "\0" . 'datetransaction', '' . "\0" . 'App\\Entity\\Transaction' . "\0" . 'users'];
+            return ['__isInitialized__', '' . "\0" . 'App\\Entity\\Transaction' . "\0" . 'id', '' . "\0" . 'App\\Entity\\Transaction' . "\0" . 'datetransaction', '' . "\0" . 'App\\Entity\\Transaction' . "\0" . 'user'];
         }
 
-        return ['__isInitialized__', '' . "\0" . 'App\\Entity\\Transaction' . "\0" . 'id', '' . "\0" . 'App\\Entity\\Transaction' . "\0" . 'datetransaction', '' . "\0" . 'App\\Entity\\Transaction' . "\0" . 'users'];
+        return ['__isInitialized__', '' . "\0" . 'App\\Entity\\Transaction' . "\0" . 'id', '' . "\0" . 'App\\Entity\\Transaction' . "\0" . 'datetransaction', '' . "\0" . 'App\\Entity\\Transaction' . "\0" . 'user'];
     }
 
     /**
@@ -213,34 +213,23 @@ class Transaction extends \App\Entity\Transaction implements \Doctrine\ORM\Proxy
     /**
      * {@inheritDoc}
      */
-    public function getUsers(): \Doctrine\Common\Collections\Collection
+    public function getUser(): ?\App\Entity\User
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getUsers', []);
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getUser', []);
 
-        return parent::getUsers();
+        return parent::getUser();
     }
 
     /**
      * {@inheritDoc}
      */
-    public function addUser(\App\Entity\User $user): \App\Entity\Transaction
+    public function setUser(?\App\Entity\User $user): \App\Entity\Transaction
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'addUser', [$user]);
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setUser', [$user]);
 
-        return parent::addUser($user);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function removeUser(\App\Entity\User $user): \App\Entity\Transaction
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'removeUser', [$user]);
-
-        return parent::removeUser($user);
+        return parent::setUser($user);
     }
 
 }

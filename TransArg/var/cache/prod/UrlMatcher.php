@@ -8,41 +8,57 @@
 return [
     false, // $matchHost
     [ // $staticRoutes
-        '/api' => [[['_route' => '_apicompte', '_controller' => 'App\\Controller\\CompteController::index'], null, null, null, true, false, null]],
-        '/partenaire' => [[['_route' => 'partenaire', '_controller' => 'App\\Controller\\PartenaireController::index'], null, null, null, false, false, null]],
+        '/api/compte' => [[['_route' => '_apinew_compte', '_controller' => 'App\\Controller\\CompteController::addcompte'], null, ['POST' => 0], null, false, false, null]],
+        '/api' => [
+            [['_route' => 'apidepot', '_controller' => 'App\\Controller\\DepotController::index'], null, null, null, true, false, null],
+            [['_route' => 'apipartenaire', '_controller' => 'App\\Controller\\PartenaireController::index'], null, null, null, true, false, null],
+            [['_route' => '_apitransaction', '_controller' => 'App\\Controller\\TransactionController::index'], null, null, null, true, false, null],
+            [['_route' => 'user', '_controller' => 'App\\Controller\\UserController::index'], null, null, null, true, false, null],
+        ],
+        '/api/depot' => [[['_route' => 'apiadd_depot', '_controller' => 'App\\Controller\\DepotController::addDepot'], null, ['POST' => 0], null, false, false, null]],
+        '/api/partenaire' => [[['_route' => 'apiadd_partenaire', '_controller' => 'App\\Controller\\PartenaireController::addPartenaire'], null, ['POST' => 0], null, false, false, null]],
+        '/api/transaction' => [[['_route' => '_apiadd_transaction', '_controller' => 'App\\Controller\\TransactionController::addTransaction'], null, ['POST' => 0], null, false, false, null]],
+        '/api/user' => [[['_route' => 'add_user', '_controller' => 'App\\Controller\\UserController::addUser'], null, ['POST' => 0], null, false, false, null]],
+        '/api/login' => [[['_route' => 'login', '_controller' => 'App\\Controller\\UserController::login'], null, ['POST' => 0], null, false, false, null]],
+        '/api/doc.json' => [[['_route' => 'app.swagger', '_controller' => 'nelmio_api_doc.controller.swagger'], null, ['GET' => 0], null, false, false, null]],
+        '/api/login_check' => [[['_route' => 'api_login_check'], null, null, null, false, false, null]],
     ],
     [ // $regexpList
         0 => '{^(?'
                 .'|/api(?'
-                    .'|/([^/]++)(*:23)'
-                    .'|(?:/(\\d+))?(*:41)'
                     .'|/(?'
-                        .'|compte(*:58)'
-                        .'|transaction(*:76)'
-                        .'|user(*:87)'
+                        .'|partenaire(?'
+                            .'|/([^/]++)(?'
+                                .'|(*:43)'
+                            .')'
+                            .'|(?:/(\\d+))?(*:62)'
+                        .')'
+                        .'|transaction(?'
+                            .'|/([^/]++)(*:93)'
+                            .'|(?:/(\\d+))?(*:111)'
+                        .')'
+                        .'|user/([^/]++)(*:133)'
                     .')'
-                    .'|(*:95)'
-                    .'|(?:/(index)(?:\\.([^/]++))?)?(*:130)'
+                    .'|(?:/(index)(?:\\.([^/]++))?)?(*:170)'
                     .'|/(?'
-                        .'|docs(?:\\.([^/]++))?(*:161)'
-                        .'|contexts/(.+)(?:\\.([^/]++))?(*:197)'
+                        .'|docs(?:\\.([^/]++))?(*:201)'
+                        .'|contexts/(.+)(?:\\.([^/]++))?(*:237)'
                     .')'
                 .')'
             .')/?$}sDu',
     ],
     [ // $dynamicRoutes
-        23 => [[['_route' => '_apishow_compte', '_controller' => 'App\\Controller\\CompteController::show'], ['id'], ['GET' => 0], null, false, true, null]],
-        41 => [[['_route' => '_apilist_compte', 'page' => '1', '_controller' => 'App\\Controller\\CompteController::list'], ['page'], ['GET' => 0], null, false, true, null]],
-        58 => [[['_route' => '_apiadd_compte', '_controller' => 'App\\Controller\\CompteController::Ajout'], [], ['POST' => 0, 'GET' => 1], null, false, false, null]],
-        76 => [[['_route' => '_apiadd_transaction', '_controller' => 'App\\Controller\\TransactionController::Ajout'], [], ['POST' => 0], null, false, false, null]],
-        87 => [[['_route' => 'add_user', '_controller' => 'App\\Controller\\UserController::register'], [], ['POST' => 0], null, false, false, null]],
-        95 => [
-            [['_route' => '_apitransaction', '_controller' => 'App\\Controller\\TransactionController::index'], [], null, null, true, false, null],
-            [['_route' => 'user', '_controller' => 'App\\Controller\\UserController::index'], [], null, null, true, false, null],
+        43 => [
+            [['_route' => 'apiupdate_partenaire', '_controller' => 'App\\Controller\\PartenaireController::updatePartenaire'], ['id'], ['PUT' => 0], null, false, true, null],
+            [['_route' => 'apishow_partenaire', '_controller' => 'App\\Controller\\PartenaireController::show'], ['id'], ['GET' => 0], null, false, true, null],
         ],
-        130 => [[['_route' => 'api_entrypoint', '_controller' => 'api_platform.action.entrypoint', '_format' => '', '_api_respond' => 'true', 'index' => 'index'], ['index', '_format'], null, null, false, true, null]],
-        161 => [[['_route' => 'api_doc', '_controller' => 'api_platform.action.documentation', '_format' => '', '_api_respond' => 'true'], ['_format'], null, null, false, true, null]],
-        197 => [
+        62 => [[['_route' => 'apilist_partenaire', 'page' => '1', '_controller' => 'App\\Controller\\PartenaireController::list'], ['page'], ['GET' => 0], null, false, true, null]],
+        93 => [[['_route' => '_apishow_transaction', '_controller' => 'App\\Controller\\TransactionController::show'], ['id'], ['GET' => 0], null, false, true, null]],
+        111 => [[['_route' => '_apilist_transaction', 'page' => '1', '_controller' => 'App\\Controller\\TransactionController::list'], ['page'], ['GET' => 0], null, false, true, null]],
+        133 => [[['_route' => 'update_user', '_controller' => 'App\\Controller\\UserController::updatte'], ['id'], ['PUT' => 0], null, false, true, null]],
+        170 => [[['_route' => 'api_entrypoint', '_controller' => 'api_platform.action.entrypoint', '_format' => '', '_api_respond' => 'true', 'index' => 'index'], ['index', '_format'], null, null, false, true, null]],
+        201 => [[['_route' => 'api_doc', '_controller' => 'api_platform.action.documentation', '_format' => '', '_api_respond' => 'true'], ['_format'], null, null, false, true, null]],
+        237 => [
             [['_route' => 'api_jsonld_context', '_controller' => 'api_platform.jsonld.action.context', '_format' => 'jsonld', '_api_respond' => 'true'], ['shortName', '_format'], null, null, false, true, null],
             [null, null, null, null, false, false, 0],
         ],

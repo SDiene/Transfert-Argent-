@@ -50,6 +50,6 @@ class __TwigTemplate_36dbb09478157387469484a1b32f71eba65717cdaa9177ae541ce4ebc60
 
     public function getSourceContext()
     {
-        return new Source("", "@Security/Collector/icon.svg", "/home/diene/Documents/Projet-Wari/TransArg/vendor/symfony/security-bundle/Resources/views/Collector/icon.svg");
+        return new Source("", "@Security/Collector/icon.svg", "/home/diene/Documents/Transfert-Argent-/TransArg/vendor/symfony/security-bundle/Resources/views/Collector/icon.svg");
     }
 }

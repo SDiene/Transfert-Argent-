@@ -98,6 +98,6 @@ class __TwigTemplate_44499f874ea8432bd5aae061623752305336b7752258a7fe086b272bc6e
 
     public function getSourceContext()
     {
-        return new Source("", "partenaire/index.html.twig", "/home/diene/Documents/Projet-Wari/TransArg/templates/partenaire/index.html.twig");
+        return new Source("", "partenaire/index.html.twig", "/home/diene/Documents/Transfert-Argent-/TransArg/templates/partenaire/index.html.twig");
     }
 }

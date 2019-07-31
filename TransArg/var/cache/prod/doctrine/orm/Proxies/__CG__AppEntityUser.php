@@ -64,10 +64,10 @@ class User extends \App\Entity\User implements \Doctrine\ORM\Proxy\Proxy
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return ['__isInitialized__', '' . "\0" . 'App\\Entity\\User' . "\0" . 'id', '' . "\0" . 'App\\Entity\\User' . "\0" . 'username', '' . "\0" . 'App\\Entity\\User' . "\0" . 'roles', '' . "\0" . 'App\\Entity\\User' . "\0" . 'password', '' . "\0" . 'App\\Entity\\User' . "\0" . 'nom', '' . "\0" . 'App\\Entity\\User' . "\0" . 'prenom', '' . "\0" . 'App\\Entity\\User' . "\0" . 'partenaires', '' . "\0" . 'App\\Entity\\User' . "\0" . 'transaction'];
+            return ['__isInitialized__', '' . "\0" . 'App\\Entity\\User' . "\0" . 'id', '' . "\0" . 'App\\Entity\\User' . "\0" . 'username', '' . "\0" . 'App\\Entity\\User' . "\0" . 'roles', '' . "\0" . 'App\\Entity\\User' . "\0" . 'password', '' . "\0" . 'App\\Entity\\User' . "\0" . 'nom', '' . "\0" . 'App\\Entity\\User' . "\0" . 'prenom', '' . "\0" . 'App\\Entity\\User' . "\0" . 'transaction', '' . "\0" . 'App\\Entity\\User' . "\0" . 'partenaire'];
         }
 
-        return ['__isInitialized__', '' . "\0" . 'App\\Entity\\User' . "\0" . 'id', '' . "\0" . 'App\\Entity\\User' . "\0" . 'username', '' . "\0" . 'App\\Entity\\User' . "\0" . 'roles', '' . "\0" . 'App\\Entity\\User' . "\0" . 'password', '' . "\0" . 'App\\Entity\\User' . "\0" . 'nom', '' . "\0" . 'App\\Entity\\User' . "\0" . 'prenom', '' . "\0" . 'App\\Entity\\User' . "\0" . 'partenaires', '' . "\0" . 'App\\Entity\\User' . "\0" . 'transaction'];
+        return ['__isInitialized__', '' . "\0" . 'App\\Entity\\User' . "\0" . 'id', '' . "\0" . 'App\\Entity\\User' . "\0" . 'username', '' . "\0" . 'App\\Entity\\User' . "\0" . 'roles', '' . "\0" . 'App\\Entity\\User' . "\0" . 'password', '' . "\0" . 'App\\Entity\\User' . "\0" . 'nom', '' . "\0" . 'App\\Entity\\User' . "\0" . 'prenom', '' . "\0" . 'App\\Entity\\User' . "\0" . 'transaction', '' . "\0" . 'App\\Entity\\User' . "\0" . 'partenaire'];
     }
 
     /**
@@ -323,40 +323,7 @@ class User extends \App\Entity\User implements \Doctrine\ORM\Proxy\Proxy
     /**
      * {@inheritDoc}
      */
-    public function getPartenaires(): \Doctrine\Common\Collections\Collection
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getPartenaires', []);
-
-        return parent::getPartenaires();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function addPartenaire(\App\Entity\Partenaire $partenaire): \App\Entity\User
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'addPartenaire', [$partenaire]);
-
-        return parent::addPartenaire($partenaire);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function removePartenaire(\App\Entity\Partenaire $partenaire): \App\Entity\User
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'removePartenaire', [$partenaire]);
-
-        return parent::removePartenaire($partenaire);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getTransaction(): ?\App\Entity\Transaction
+    public function getTransaction(): \Doctrine\Common\Collections\Collection
     {
 
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'getTransaction', []);
@@ -367,12 +334,45 @@ class User extends \App\Entity\User implements \Doctrine\ORM\Proxy\Proxy
     /**
      * {@inheritDoc}
      */
-    public function setTransaction(?\App\Entity\Transaction $transaction): \App\Entity\User
+    public function addTransaction(\App\Entity\Transaction $transaction): \App\Entity\User
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setTransaction', [$transaction]);
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'addTransaction', [$transaction]);
 
-        return parent::setTransaction($transaction);
+        return parent::addTransaction($transaction);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function removeTransaction(\App\Entity\Transaction $transaction): \App\Entity\User
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'removeTransaction', [$transaction]);
+
+        return parent::removeTransaction($transaction);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getPartenaire(): ?\App\Entity\Partenaire
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getPartenaire', []);
+
+        return parent::getPartenaire();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setPartenaire(?\App\Entity\Partenaire $partenaire): \App\Entity\User
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setPartenaire', [$partenaire]);
+
+        return parent::setPartenaire($partenaire);
     }
 
 }
