@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
-
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 /**
  * @Route("/api", name="api")
@@ -32,7 +32,8 @@ class PartenaireController extends AbstractController
     }
 
     /**
-     * @Route("/partenaire", name="add_depot", methods={"POST"})
+     * @Route("/partenaire", name="add_partenaire", methods={"POST"})
+     * @IsGranted("ROLE_SUPER_ADMIN")
      */
 
     public function addPartenaire(Request $request, SerializerInterface $serializer, EntityManagerInterface $entityManager)
@@ -50,6 +51,7 @@ class PartenaireController extends AbstractController
 
      /**
      * @Route("/partenaire/{id}", name="update_partenaire", methods={"PUT"})
+     * @IsGranted("ROLE_SUPER_ADMIN")
      */
 
     public function updatePartenaire(Request $request, SerializerInterface $serializer, Partenaire $partenaire, ValidatorInterface $validator, EntityManagerInterface $entityManager)
@@ -80,6 +82,7 @@ class PartenaireController extends AbstractController
     
     /**
      * @Route("/partenaire/{id}", name="show_partenaire", methods={"GET"})
+     * @IsGranted("ROLE_SUPER_ADMIN")
      */
 
     public function show(Partenaire $partenaire, PartenaireRepository $partenaireRepository, SerializerInterface $serializer)
@@ -95,6 +98,7 @@ class PartenaireController extends AbstractController
 
     /**
      * @Route("/partenaire/{page<\d+>?1}", name="list_partenaire", methods={"GET"})
+     * @IsGranted("ROLE_SUPER_ADMIN")
     */
 
     public function list(Request $request, PartenaireRepository $partenaireRepository, SerializerInterface $serializer)

@@ -13,6 +13,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Serializer\SerializerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 /**
  * @Route("/api",name="_api")
@@ -33,6 +34,7 @@ class TransactionController extends AbstractController
 
     /**
      * @Route("/transaction", name="add_transaction", methods={"POST"})
+     * @IsGranted("ROLE_USER")
     */
 
     public function addTransaction(Request $request, EntityManagerInterface $entityManager)
@@ -56,6 +58,7 @@ class TransactionController extends AbstractController
 
     /**
      * @Route("/transaction/{id}", name="show_transaction", methods={"GET"})
+     * @IsGranted("ROLE_USER")
      */
 
     public function show(Transaction $transaction, TransactionRepository $transactionRepository, SerializerInterface $serializer)
@@ -71,6 +74,7 @@ class TransactionController extends AbstractController
 
     /**
      * @Route("/transaction/{page<\d+>?1}", name="list_transaction", methods={"GET"})
+     * @IsGranted("ROLE_USER")
     */
 
     public function list(Request $request, TransactionRepository $transactionRepository, SerializerInterface $serializer)

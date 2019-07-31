@@ -17,18 +17,8 @@ use Doctrine\ORM\EntityManagerInterface;
 class CompteController extends AbstractController
 {
     /**
-     * @Route("/", name="compte")
-     */
-    public function index()
-    {
-        return $this->render('compte/index.html.twig', [
-            'controller_name' => 'CompteController',
-        ]);
-    }
-
-    /**
      * @Route("/compte", name="new_compte", methods={"POST"})
-     * @IsGranted("ROLE_PARTENAIRE")
+     * @IsGranted("ROLE_CAISSIER")
     */
 
     public function addcompte(Request $request, EntityManagerInterface $entityManager)
@@ -45,7 +35,7 @@ class CompteController extends AbstractController
 
             $data = [
                 'status' => 201,
-                'message' => 'Le compte vient d\'etre créer'
+                'message' => 'Le compte vient d\'etre créer par un caissier'
             ];
 
             return new JsonResponse($data, 201);

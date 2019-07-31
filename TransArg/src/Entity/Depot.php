@@ -2,8 +2,6 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -29,9 +27,9 @@ class Depot
     private $montant;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Partenaire", inversedBy="depot")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Compte", inversedBy="depots")
      */
-    private $partenaire;
+    private $compte;
 
     public function getId(): ?int
     {
@@ -62,14 +60,14 @@ class Depot
         return $this;
     }
 
-    public function getPartenaire(): ?Partenaire
+    public function getCompte(): ?Compte
     {
-        return $this->partenaire;
+        return $this->compte;
     }
 
-    public function setPartenaire(?Partenaire $partenaire): self
+    public function setCompte(?Compte $compte): self
     {
-        $this->partenaire = $partenaire;
+        $this->compte = $compte;
 
         return $this;
     }
